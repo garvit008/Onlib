@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1070214599728",
+    "firebase_url": "https://onlib-348ca.firebaseio.com",
+    "project_id": "onlib-348ca",
+    "storage_bucket": "onlib-348ca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070214599728:android:2fcda6d5227807c9",
+        "android_client_info": {
+          "package_name": "com.ips.lib.onlib"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1070214599728-rc26csr3a16otvd9qm4e1drdo3lf89fe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6rIpU0YHqUlfGP6qiUMVuuMLyAd1LNjg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

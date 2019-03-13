@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/relalayout1">
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/computerCode"
+            android:textSize="18sp"
+            android:hint="Computer Code"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            />
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/password"
+            android:layout_below="@+id/computerCode"
+            android:textSize="18sp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/loginBtn"
+            android:layout_below="@+id/password"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="Login"
+            android:textSize="18sp"
+            />
+
+        <ProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:id="@+id/loginPbar"
+            android:visibility="gone"
+            />
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
