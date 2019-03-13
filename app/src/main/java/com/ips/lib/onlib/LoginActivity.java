@@ -89,6 +89,8 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+   // private
+
     private void updateUI(FirebaseUser user) {
         if (user != null) {
             Log.d(TAG, "updateUI: user logging in");
