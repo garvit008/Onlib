@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     private ProgressBar pbar;
     private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,17 +44,16 @@ public class LoginActivity extends AppCompatActivity {
         initSignIn();
     }
 
-    private void initSignIn(){
+    private void initSignIn() {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String compCode = computerCode.getText().toString();
                 String pass = password.getText().toString();
-                if(compCode.equals("") || pass.equals("")){
+                if (compCode.equals("") || pass.equals("")) {
                     Toast.makeText(LoginActivity.this, "credentials cannot be empty", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    compCode+="@ipsa.com";
+                } else {
+                    compCode += "@ipsa.com";
                     signIn(compCode, pass);
                     pbar.setVisibility(View.VISIBLE);
                     computerCode.setAlpha(0.5f);
@@ -65,19 +65,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-
-    private void signIn(String computerCode, String password){
+    private void signIn(String computerCode, String password) {
         Log.d(TAG, "signIn: credentials: " + computerCode + ", " + password);
         mAuth.signInWithEmailAndPassword(computerCode, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Log.d(TAG, "onComplete: signin successfull");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
-                        }
-                        else {
+                        } else {
                             Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
 
                             updateUI(null);
@@ -91,15 +89,14 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void updateUI(FirebaseUser user){
-        if(user!=null){
+    private void updateUI(FirebaseUser user) {
+        if (user != null) {
             Log.d(TAG, "updateUI: user logging in");
             pbar.setVisibility(View.GONE);
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
-        }
-        else{
+        } else {
             Log.d(TAG, "updateUI: user is null");
             pbar.setVisibility(View.GONE);
         }
