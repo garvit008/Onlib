@@ -10,15 +10,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <android.support.v7.widget.Toolbar
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            android:background="@color/colorPrimary"
-            android:id="@+id/toolbar">
-
-        </android.support.v7.widget.Toolbar>
-
+            android:layout_height="wrap_content"
+            android:id="@+id/relalayout1">
+         <include layout="@layout/activity_home_toolbar"/>
+        </RelativeLayout>
     </RelativeLayout>
 <!--     nav drawer    -->
 <android.support.design.widget.NavigationView
@@ -27,9 +24,9 @@
     android:layout_gravity="start"
     android:fitsSystemWindows="true"
     android:id="@+id/nav_view"
-    android:background="@color/dark_grey"
+    android:theme="@style/NavigationView"
+    android:background="@color/material_appbar_grey"
     app:itemTextColor="@color/text_white"
-    app:itemIconTint="@color/text_white"
     app:menu="@menu/drawer_menu"
     app:headerLayout="@layout/nav_drawer_header"
     >

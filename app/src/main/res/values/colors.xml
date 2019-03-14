@@ -6,4 +6,11 @@
     <color name="light_grey">#6e7072</color>
     <color name="text_white">#ffffff</color>
     <color name="dark_grey">#323235</color>
+    <color name="material_appbar_grey">#212121</color>
+    <color name="search_bar_grey">#303030</color>
+    <color name="material_secondary_text_grey">#b3ffffff</color>
+    <color name="material_icon_grey">#80FFFFFF</color>
+    <color name="material_dark_search">#424242</color>
+    <color name="material_divider_light">#1FFFFFFF</color>
+    <color name="blue">#149EF0</color>
 </resources>

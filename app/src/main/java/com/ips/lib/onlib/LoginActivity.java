@@ -3,12 +3,16 @@ package com.ips.lib.onlib;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,7 +31,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     private ProgressBar pbar;
     private FirebaseAuth mAuth;
-
+    private TextView compCodeTv;
+    private TextView passwordTv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,11 +41,64 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         login = findViewById(R.id.loginBtn);
         pbar = findViewById(R.id.loginPbar);
+        compCodeTv = findViewById(R.id.computerCodeTv);
+        passwordTv = findViewById(R.id.passwordTv);
+        compCodeTv.setVisibility(View.GONE);
+        passwordTv.setVisibility(View.GONE);
         mAuth = FirebaseAuth.getInstance();
         pbar.setVisibility(View.GONE);
         computerCode.setAlpha(1f);
         password.setAlpha(1f);
         login.setAlpha(1f);
+        computerCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                compCodeTv.setVisibility(View.VISIBLE);
+                passwordTv.setVisibility(View.GONE);
+                DrawableCompat.setTint(computerCode.getBackground(),
+                        ContextCompat.getColor(getApplicationContext(), R.color.blue));
+                DrawableCompat.setTint(password.getBackground(),
+                        ContextCompat.getColor(getApplicationContext(), R.color.material_divider_light));
+            }
+        });
+        computerCode.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b){
+                    compCodeTv.setVisibility(View.VISIBLE);
+                    passwordTv.setVisibility(View.GONE);
+                    DrawableCompat.setTint(computerCode.getBackground(),
+                            ContextCompat.getColor(getApplicationContext(), R.color.blue));
+                    DrawableCompat.setTint(password.getBackground(),
+                            ContextCompat.getColor(getApplicationContext(), R.color.material_divider_light));
+                }
+            }
+        });
+
+        password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                passwordTv.setVisibility(View.VISIBLE);
+                compCodeTv.setVisibility(View.GONE);
+                DrawableCompat.setTint(password.getBackground(),
+                        ContextCompat.getColor(getApplicationContext(), R.color.blue));
+                DrawableCompat.setTint(computerCode.getBackground(),
+                        ContextCompat.getColor(getApplicationContext(), R.color.material_divider_light));
+            }
+        });
+        password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+               if(b){
+                   passwordTv.setVisibility(View.VISIBLE);
+                   compCodeTv.setVisibility(View.GONE);
+                   DrawableCompat.setTint(password.getBackground(),
+                           ContextCompat.getColor(getApplicationContext(), R.color.blue));
+                   DrawableCompat.setTint(computerCode.getBackground(),
+                           ContextCompat.getColor(getApplicationContext(), R.color.material_divider_light));
+               }
+            }
+        });
         initSignIn();
     }
 
@@ -48,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                closeKeyBoard();
                 String compCode = computerCode.getText().toString();
                 String pass = password.getText().toString();
                 if (compCode.equals("") || pass.equals("")) {
@@ -100,7 +159,17 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         } else {
             Log.d(TAG, "updateUI: user is null");
+            computerCode.setAlpha(1f);
+            password.setAlpha(1f);
+            login.setAlpha(1f);
             pbar.setVisibility(View.GONE);
+        }
+    }
+
+    private void closeKeyBoard() {
+        if (getCurrentFocus() != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
     }
 
