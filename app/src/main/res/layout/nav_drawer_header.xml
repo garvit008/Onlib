@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/light_grey">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/relalayout1">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_profile_default"
+        app:civ_border_width="0.5dp"
+        android:id="@+id/profileImageView"
+        app:civ_border_color="@color/text_white"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/profileImageView"
+            android:text="Kaam Bhari"
+            android:textSize="24sp"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/text_white"
+            />
+
+    </RelativeLayout>
+
+</RelativeLayout>
