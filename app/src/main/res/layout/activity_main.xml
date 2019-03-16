@@ -9,7 +9,8 @@
     <!--   main home layout -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/material_backgroud_grey">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

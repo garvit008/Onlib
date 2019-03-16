@@ -13,4 +13,5 @@
     <color name="material_dark_search">#424242</color>
     <color name="material_divider_light">#1FFFFFFF</color>
     <color name="blue">#149EF0</color>
+    <color name="material_backgroud_grey">#303030</color>
 </resources>
