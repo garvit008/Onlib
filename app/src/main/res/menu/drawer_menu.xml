@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="single"
+        android:id="@+id/menu_top">
 
         <item
             android:id="@+id/home"
@@ -19,7 +20,11 @@
         <item
             android:id="@+id/reqAbook"
             android:title="@string/req_book"
-            android:icon="@drawable/ic_req_book"/>
+            android:icon="@drawable/ic_req_book"/>0
+    </group>
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/settings"
             android:title="@string/settings"
@@ -29,8 +34,8 @@
             android:title="@string/logout"
             android:icon="@drawable/ic_logout"/>
 
-
-
     </group>
+
+
 
 </menu>

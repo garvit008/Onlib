@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         });
         FirebaseApp.initializeApp(this);
         mAuth = FirebaseAuth.getInstance();
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.home_toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         else{
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 }

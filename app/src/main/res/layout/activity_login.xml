@@ -3,38 +3,74 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/relalayout1">
+        android:id="@+id/relalayout1"
+        android:background="@color/material_dark_search">
 
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/LoginIntoAppTv"
+            android:textSize="36sp"
+           android:layout_marginTop="200dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Log in to OnLib"
+            android:textColor="@color/text_white"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/LoginIntoAppTv"
+            android:id="@+id/computerCodeTv"
+            android:text="Computer Code"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/blue"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:id="@+id/computerCode"
             android:textSize="18sp"
             android:hint="Computer Code"
-            android:layout_centerInParent="true"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
+            android:layout_below="@id/computerCodeTv"
+            android:layout_marginTop="10dp"
+            android:textCursorDrawable="@null"
+            android:textColor="@color/text_white"
+            android:textColorHint="@color/material_secondary_text_grey"
+            android:backgroundTint="@color/material_divider_light"
             />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/computerCode"
+            android:id="@+id/passwordTv"
+            android:text="Password"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/blue"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:id="@+id/password"
-            android:layout_below="@+id/computerCode"
+            android:layout_below="@+id/passwordTv"
             android:textSize="18sp"
             android:hint="Password"
             android:inputType="textPassword"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
-
+            android:textColor="@color/text_white"
+            android:textCursorDrawable="@null"
+            android:textColorHint="@color/material_secondary_text_grey"
+            android:backgroundTint="@color/material_divider_light"
             />
 
         <Button
@@ -44,13 +80,17 @@
             android:layout_below="@+id/password"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
-            android:text="Login"
+            android:layout_marginTop="20dp"
+            android:text="Log in"
             android:textSize="18sp"
+            android:background="@drawable/round_corner_login_button_layout"
+            android:textColor="@color/text_white"
             />
 
         <ProgressBar
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_below="@id/computerCode"
             android:layout_centerInParent="true"
             android:id="@+id/loginPbar"
             android:visibility="gone"
