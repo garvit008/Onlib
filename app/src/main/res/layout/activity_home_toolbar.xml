@@ -24,7 +24,7 @@
                     android:layout_centerVertical="true"
                     android:id="@+id/search_icon"/>
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Search"
                     android:layout_centerVertical="true"
@@ -32,6 +32,7 @@
                     android:textColor="@color/material_secondary_text_grey"
                     android:textSize="18sp"
                     android:layout_marginLeft="10dp"
+                    android:id="@+id/searchTv"
                     />
             </RelativeLayout>
     </android.support.v7.widget.Toolbar>
