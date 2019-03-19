@@ -25,10 +25,21 @@
             android:layout_toRightOf="@id/profileImageView"
             android:text="Kaam Bhari"
             android:textSize="24sp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="40dp"
             android:layout_marginLeft="20dp"
             android:textColor="@color/text_white"
+            android:id="@+id/headerNameTv"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/computerCodeTv"
+            android:layout_below="@id/headerNameTv"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="5dp"
+            android:text="36921"
+            android:textColor="@color/material_secondary_text_grey"
+            android:textSize="18sp"/>
 
     </RelativeLayout>
 

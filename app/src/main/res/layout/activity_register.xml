@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/regislayout"
+    android:background="@color/material_dark_search"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:textSize="35dp"
+        android:id="@+id/regText"
+        android:textColor="@color/blue"
+        android:layout_centerHorizontal="true"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/regText"
+        android:layout_marginLeft="24dp"
+        android:text="@string/register_as"
+        android:textColor="@color/blue"
+        android:textSize="16sp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/userTypeTv"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/userTypeTv"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="65dp"
+        android:id="@+id/userTypeSpinner"
+        >
+
+    </Spinner>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userTypeTv"
+        android:id="@+id/computerCodeTV"
+        android:text="Computer Code"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/blue"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/computerCodeET"
+        android:inputType="number"
+        android:textSize="18sp"
+        android:hint="Computer Code"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/computerCodeTV"
+        android:layout_marginTop="10dp"
+        android:textCursorDrawable="@null"
+        android:textColor="@color/text_white"
+        android:textColorHint="@color/material_secondary_text_grey"
+        android:backgroundTint="@color/material_divider_light"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/computerCodeET"
+        android:id="@+id/nameTV"
+        android:text="Name"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/blue"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/nameET"
+        android:textSize="18sp"
+        android:hint="Name"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/nameTV"
+        android:layout_marginTop="10dp"
+        android:textCursorDrawable="@null"
+        android:textColor="@color/text_white"
+        android:textColorHint="@color/material_secondary_text_grey"
+        android:backgroundTint="@color/material_divider_light"
+        />
+    <ProgressBar
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/computerCode"
+        android:layout_centerInParent="true"
+        android:id="@+id/registerPbar"
+        android:visibility="gone"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nameET"
+        android:id="@+id/emailTV"
+        android:text="Email id"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/blue"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/emailET"
+        android:textSize="18sp"
+        android:hint="Enter email id"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/emailTV"
+        android:layout_marginTop="10dp"
+        android:textCursorDrawable="@null"
+        android:textColor="@color/text_white"
+        android:textColorHint="@color/material_secondary_text_grey"
+        android:backgroundTint="@color/material_divider_light"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/emailET"
+        android:id="@+id/passwordTV"
+        android:text="Password"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/blue"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/passwordET"
+        android:textSize="16sp"
+        android:hint="Enter password (YYYYMMDD)"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/passwordTV"
+        android:layout_marginTop="10dp"
+        android:textCursorDrawable="@null"
+        android:textColor="@color/text_white"
+        android:textColorHint="@color/material_secondary_text_grey"
+        android:backgroundTint="@color/material_divider_light"
+        android:inputType="numberPassword"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/registerBtn"
+        android:layout_below="@+id/passwordET"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Register"
+        android:textSize="18sp"
+        android:background="@drawable/round_corner_login_button_layout"
+        android:textColor="@color/text_white"
+        />
+
+
+
+</RelativeLayout>

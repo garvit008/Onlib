@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FirebaseApp.initializeApp(this);
         drawerLayout = findViewById(R.id.drawerLayout);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        FirebaseApp.initializeApp(this);
+
         mAuth = FirebaseAuth.getInstance();
         Toolbar toolbar = findViewById(R.id.home_toolbar);
         setSupportActionBar(toolbar);
