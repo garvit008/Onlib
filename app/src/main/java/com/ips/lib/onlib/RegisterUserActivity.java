@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.ips.lib.onlib.Models.Librarian;
 import com.ips.lib.onlib.Models.User;
 
 public class RegisterUserActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -47,6 +48,7 @@ public class RegisterUserActivity extends AppCompatActivity implements AdapterVi
         progressBar = findViewById(R.id.registerPbar);
         progressBar.setVisibility(View.GONE);
         userTypeChoice = findViewById(R.id.userTypeSpinner);
+        userTypeChoice.setOnItemSelectedListener(this);
         firebaseDatabase = FirebaseDatabase.getInstance();
         myRef = firebaseDatabase.getReference();
         mAuth = FirebaseAuth.getInstance();
@@ -110,7 +112,8 @@ public class RegisterUserActivity extends AppCompatActivity implements AdapterVi
                                 progressBar.setVisibility(View.GONE);
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 Toast.makeText(RegisterUserActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
-                                addUserToDatabase(user.getUid(), computerCode, username, emailStr);
+                                Log.d(TAG, "onComplete: userType: " + userType);
+                                addUserToDatabase(user.getUid(), computerCode, username, emailStr, userType);
                                 updateUI(user);
                             } else {
                                 // If sign in fails, display a message to the user.
@@ -138,17 +141,32 @@ public class RegisterUserActivity extends AppCompatActivity implements AdapterVi
         }
     }
 
-    private void addUserToDatabase(String userID, String compCode, String name, String email){
-        User user = new User();
-        user.setComputer_code(compCode);
-        user.setUser_id(userID);
-        user.setEmail(email);
-        user.setName(name);
-        user.setIssued_books(null);
-        user.setWishlist(null);
-        user.setProfile_pic("");
-        myRef.child(getString(R.string.dbname_users))
-                .child(userID).setValue(user);
+    private void addUserToDatabase(String userID, String compCode, String name, String email, String userType){
+     if(userType.equals(getString(R.string.user_type_user))){
+        Log.d(TAG, "addUserToDatabase: userType: "+userType);
+            User user = new User();
+            user.setComputer_code(compCode);
+            user.setUser_id(userID);
+            user.setEmail(email);
+            user.setName(name);
+            user.setIssued_books(null);
+            user.setWishlist(null);
+            user.setProfile_pic("");
+            myRef.child(getString(R.string.dbname_users))
+                    .child(userID).setValue(user);
+        }
+
+        else if(userType.equals(getString(R.string.user_type_librarian))){
+            Librarian librarian = new Librarian();
+            librarian.setComputer_code(compCode);
+            librarian.setName(name);
+            librarian.setUser_id(userID);
+            librarian.setEmail(email);
+            librarian.setProfile_pic("");
+            myRef.child(getString(R.string.dbname_librarians))
+                    .child(userID).setValue(librarian);
+        }
+
     }
 
 }

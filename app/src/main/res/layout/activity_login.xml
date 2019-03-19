@@ -23,31 +23,34 @@
             android:textColor="@color/text_white"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/LoginIntoAppTv"
-            android:layout_marginLeft="24dp"
-            android:text="Login as: "
-            android:textColor="@color/blue"
-            android:textSize="18sp"
             android:layout_marginTop="20dp"
-            android:id="@+id/userTypeTv"/>
+            android:id="@+id/linLayout">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:text="@string/login_as"
+                android:textColor="@color/blue"
+                android:textSize="16sp"
+                android:id="@+id/userTypeTv"/>
 
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/userTypeTv"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="210dp"
-            android:id="@+id/userTypeSpinner"
-            >
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/userTypeSpinner"
+                >
 
-        </Spinner>
+            </Spinner>
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/userTypeTv"
+            android:layout_below="@+id/linLayout"
             android:id="@+id/computerCodeTv"
             android:text="Computer Code"
             android:layout_marginLeft="24dp"

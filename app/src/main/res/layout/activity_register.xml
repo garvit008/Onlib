@@ -1,49 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/regislayout"
-    android:background="@color/material_dark_search"
-    android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/material_backgroud_grey">
+
+    <ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/regislayout"
+            android:background="@color/material_backgroud_grey"
+            >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="@string/register_account"
         android:textSize="35dp"
+        android:layout_marginTop="70dp"
         android:id="@+id/regText"
         android:textColor="@color/blue"
         android:layout_centerHorizontal="true"
         />
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/regText"
-        android:layout_marginLeft="24dp"
-        android:text="@string/register_as"
-        android:textColor="@color/blue"
-        android:textSize="16sp"
         android:layout_marginTop="20dp"
-        android:id="@+id/userTypeTv"/>
+        android:id="@+id/linLayout">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:text="@string/register_as"
+            android:textColor="@color/blue"
+            android:textSize="16sp"
+            android:id="@+id/userTypeTv"/>
 
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/userTypeTv"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="65dp"
-        android:id="@+id/userTypeSpinner"
-        >
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/userTypeSpinner"
+            >
 
-    </Spinner>
+        </Spinner>
+    </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/userTypeTv"
+        android:layout_below="@+id/linLayout"
         android:id="@+id/computerCodeTV"
         android:text="Computer Code"
         android:layout_marginLeft="24dp"
@@ -168,4 +177,6 @@
 
 
 
+</RelativeLayout>
+</ScrollView>
 </RelativeLayout>

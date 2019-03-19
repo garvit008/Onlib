@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.ips.lib.onlib.utils.SharedPrefManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,9 +30,29 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private DrawerLayout drawerLayout;
     private TextView searchTv;
+    private SharedPrefManager sharedPrefManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (!isTaskRoot()
+                && getIntent().hasCategory(Intent.CATEGORY_LAUNCHER)
+                && getIntent().getAction() != null
+                && getIntent().getAction().equals(Intent.ACTION_MAIN)) {
+
+            finish();
+            return;
+        }
+        Intent intent = getIntent();
+        sharedPrefManager = new SharedPrefManager(this);
+        if(intent.hasExtra(getString(R.string.user_type))){
+            String userType = intent.getStringExtra(getString(R.string.user_type));
+            sharedPrefManager.saveUserType(userType);
+            if(userType.equals("Librarian")){
+                Intent in = new Intent(MainActivity.this, LibrarianMainActivity.class);
+                startActivity(in);
+                finish();
+            }
+        }
         setContentView(R.layout.activity_main);
         FirebaseApp.initializeApp(this);
         drawerLayout = findViewById(R.id.drawerLayout);
@@ -46,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.closeDrawers();
                 if(menuItem.getItemId() == R.id.logout){
                     mAuth.signOut();
+                    sharedPrefManager.clearUserType();
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
@@ -54,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
         mAuth = FirebaseAuth.getInstance();
         Toolbar toolbar = findViewById(R.id.home_toolbar);
         setSupportActionBar(toolbar);
@@ -75,11 +96,30 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onStart() {
+        Log.d(TAG, "onStart: called");
         super.onStart();
+        String userType = sharedPrefManager.getUserType();
+        if(userType.equals("Librarian")){
+            Intent in = new Intent(MainActivity.this, LibrarianMainActivity.class);
+            startActivity(in);
+            finish();
+        }
         FirebaseApp.initializeApp(this);
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String userType = sharedPrefManager.getUserType();
+        Log.d(TAG, "onResume: called with userType " + userType);
+        if(userType.equals("Librarian")){
+            Intent in = new Intent(MainActivity.this, LibrarianMainActivity.class);
+            startActivity(in);
+            finish();
+        }
     }
 
     @Override

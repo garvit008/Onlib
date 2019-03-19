@@ -26,6 +26,7 @@
             <meta-data android:name="android.app.searchable"
                 android:resource="@xml/searchable"/>
         </activity>
+        <activity android:name=".LibrarianMainActivity"/>
         <activity android:name=".RegisterUserActivity"/>
         <provider android:name=".SearchSuggestionProvider"
             android:authorities="com.ips.lib.onlib.SearchSuggestionProvider"
