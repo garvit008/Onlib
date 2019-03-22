@@ -1,6 +1,7 @@
 package com.ips.lib.onlib;
 
 import android.Manifest;
+import android.app.DownloadManager;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -22,7 +23,15 @@ import android.widget.Toast;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.ips.lib.onlib.utils.SharedPrefManager;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private TextView searchTv;
     private SharedPrefManager sharedPrefManager;
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
+    private boolean userFound;
+    private CircleImageView profileImageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,19 +55,24 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return;
         }
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseApp.initializeApp(this);
+        updateUI(mAuth.getCurrentUser());
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference();
         Intent intent = getIntent();
         sharedPrefManager = new SharedPrefManager(this);
+
         if(intent.hasExtra(getString(R.string.user_type))){
             String userType = intent.getStringExtra(getString(R.string.user_type));
+            Log.d(TAG, "onCreate: userType = " + userType);
             sharedPrefManager.saveUserType(userType);
             if(userType.equals("Librarian")){
-                Intent in = new Intent(MainActivity.this, LibrarianMainActivity.class);
-                startActivity(in);
-                finish();
+                checkUserTypeInDB(mAuth.getCurrentUser());
             }
         }
+
         setContentView(R.layout.activity_main);
-        FirebaseApp.initializeApp(this);
         drawerLayout = findViewById(R.id.drawerLayout);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -76,7 +94,15 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        mAuth = FirebaseAuth.getInstance();
+        View headerview = navigationView.getHeaderView(0);
+        profileImageView = headerview.findViewById(R.id.profileImageView);
+        profileImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(in);
+            }
+        });
         Toolbar toolbar = findViewById(R.id.home_toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -90,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-       // mAuth.signOut();
 
     }
 
@@ -98,15 +123,25 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         Log.d(TAG, "onStart: called");
         super.onStart();
-        String userType = sharedPrefManager.getUserType();
-        if(userType.equals("Librarian")){
-            Intent in = new Intent(MainActivity.this, LibrarianMainActivity.class);
-            startActivity(in);
-            finish();
-        }
         FirebaseApp.initializeApp(this);
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
+
+//        String userType = sharedPrefManager.getUserType();
+//        if(userType.equals("Librarian")){
+//            if(checkUserTypeInDB(currentUser)){
+//                Intent in = new Intent(MainActivity.this, LibrarianMainActivity.class);
+//                startActivity(in);
+//                finish();
+//            }
+//            else {
+//                Toast.makeText(this, "Invalid User. Check the selected user type", Toast.LENGTH_SHORT).show();
+//                Intent in = new Intent(MainActivity.this, LoginActivity.class);
+//                startActivity(in);
+//                finish();
+//            }
+//
+//        }
         updateUI(currentUser);
     }
 
@@ -142,5 +177,50 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+    }
+
+    /**
+     * function to check if user exists in the Librarian DB
+     * @param currentUser Firebase user
+     * @return true if user exists, false otherwise
+     */
+    private void checkUserTypeInDB(FirebaseUser currentUser){
+        if(currentUser!=null){
+            Query query = myRef.child(getString(R.string.dbname_librarians))
+                    .child(currentUser.getUid());
+
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                boolean localUserFound = false;
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for(DataSnapshot ds: dataSnapshot.getChildren()){
+                        Log.d(TAG, "onDataChange: user found " + ds.toString());
+                        localUserFound = true;
+                        break;
+                    }
+                    if(localUserFound){
+                        Log.d(TAG, "onCreate: user found in DB");
+                        Intent in = new Intent(MainActivity.this, LibrarianMainActivity.class);
+                        startActivity(in);
+                        finish();
+                    }
+                    else {
+                        Log.d(TAG, "onCreate: user not found in DB");
+                        Toast.makeText(MainActivity.this, "Invalid User. Check the selected user type", Toast.LENGTH_SHORT).show();
+                        Intent in = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(in);
+                        finish();
+                    }
+
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+        }
+        Log.d(TAG, "checkUserTypeInDB: userFound = " + userFound);
+
     }
 }

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/app_bar_layout"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            android:id="@+id/collapsingToolbar"
+            app:expandedTitleTextAppearance="@android:color/transparent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/material_appbar_grey">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.5"
+                android:background="@color/material_appbar_grey">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profileImageView"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    app:civ_border_width="0.5dp"
+                    android:layout_marginTop="50dp"
+                    android:src="@drawable/ic_profile_default"
+                    android:layout_marginLeft="100dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/nameTV"
+                    android:text="Kaam Bhari"
+                    android:textColor="@color/blue"
+                    android:layout_marginTop="20dp"
+                    android:textSize="24sp"
+                    android:textAlignment="center"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/computerCodeTv"
+                    android:text="36921"
+                    android:textColor="@color/material_secondary_text_grey"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    />
+            </LinearLayout>
+            </FrameLayout>
+           <!-- normal toolbar -->
+           <android.support.v7.widget.Toolbar
+               android:layout_width="match_parent"
+               android:layout_height="?attr/actionBarSize"
+               app:popupTheme="@style/ToolbarTheme"
+               app:layout_collapseMode="pin"
+               android:elevation="10dp"
+               android:id="@+id/profile_toolbar">
+
+           </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/material_backgroud_grey"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Profile Cards"
+            android:textSize="24dp"
+            android:textAlignment="center"
+            android:textColor="@color/text_white"
+            android:layout_marginTop="150dp"/>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

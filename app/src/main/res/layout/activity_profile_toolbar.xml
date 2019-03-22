@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/profile_toolbar"
+        android:background="@color/material_appbar_grey"
+        app:layout_collapseMode="pin"
+        android:elevation="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/back_arrow_tb"
+                android:src="@drawable/ic_backarrow_white"
+                android:layout_marginLeft="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User Profile"
+                android:textSize="18sp"
+                android:textColor="@color/text_white"
+                android:id="@+id/userTypeTv"
+                android:layout_toRightOf="@id/back_arrow_tb"
+                android:layout_marginTop="10dp"
+                android:layout_centerVertical="true"/>
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/edit_profile_iv"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_edit_white"
+                android:layout_marginTop="10dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"/>
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.Toolbar>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</merge>

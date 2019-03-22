@@ -28,6 +28,7 @@
         </activity>
         <activity android:name=".LibrarianMainActivity"/>
         <activity android:name=".RegisterUserActivity"/>
+        <activity android:name=".ProfileActivity"/>
         <provider android:name=".SearchSuggestionProvider"
             android:authorities="com.ips.lib.onlib.SearchSuggestionProvider"
             android:exported="false"
