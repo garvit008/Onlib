@@ -16,16 +16,41 @@
             android:layout_height="wrap_content"
             android:id="@+id/LoginIntoAppTv"
             android:textSize="36sp"
-           android:layout_marginTop="200dp"
+            android:layout_marginTop="150dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:text="Log in to OnLib"
             android:textColor="@color/text_white"
             />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/LoginIntoAppTv"
+            android:layout_marginTop="20dp"
+            android:id="@+id/linLayout">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:text="@string/login_as"
+                android:textColor="@color/blue"
+                android:textSize="16sp"
+                android:id="@+id/userTypeTv"/>
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/userTypeSpinner"
+                >
+
+            </Spinner>
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/LoginIntoAppTv"
+            android:layout_below="@+id/linLayout"
             android:id="@+id/computerCodeTv"
             android:text="Computer Code"
             android:layout_marginLeft="24dp"
@@ -73,6 +98,8 @@
             android:backgroundTint="@color/material_divider_light"
             />
 
+
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -86,6 +113,28 @@
             android:background="@drawable/round_corner_login_button_layout"
             android:textColor="@color/text_white"
             />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/loginBtn"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/relalayout2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:layout_centerInParent="true"
+                android:text="@string/register_new_user"
+                android:textColor="@color/blue"
+                android:textSize="18sp"
+                android:id="@+id/signUpTv"
+                />
+        </RelativeLayout>
+
+
 
         <ProgressBar
             android:layout_width="50dp"

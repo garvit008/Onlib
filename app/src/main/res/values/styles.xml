@@ -6,10 +6,16 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/blue</item>
     </style>
 
     <style name="NavigationView"  parent="Base.Theme.AppCompat">
         <item name="android:listDivider">@color/material_divider_light</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/material_appbar_grey</item>
+        <item name="colorPrimaryDark">@color/material_appbar_grey</item>
     </style>
 
 

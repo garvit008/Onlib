@@ -9,4 +9,23 @@
     <string name="app_label">OnLib</string>
     <string name="search_hint">Search Books...</string>
     <string name="speak_voice">Speak...</string>
+    <string name="forgot_password">FORGOT PASSWORD</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="email_me">EMAIL ME</string>
+    <string name="cancel">cancel</string>
+    <string name="register_new_user">Register new user</string>
+    <string-array name="user_type">
+            <item>User</item>
+            <item>Librarian</item>
+    </string-array>
+    <string name="user_type">user_type</string>
+    <string name="user_type_user">User</string>
+    <string name="user_type_librarian">Librarian</string>
+    <string name="register_as">Register as:</string>
+
+    <string name="dbname_users">users</string>
+    <string name="dbname_librarians">librarians</string>
+    <string name="register_account">Register Account</string>
+    <string name="login_as">Login as</string>
+    <string name="edit_profile">Edit Profile</string>
 </resources>
