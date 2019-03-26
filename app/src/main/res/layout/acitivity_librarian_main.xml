@@ -24,7 +24,8 @@
             android:layout_width="160dp"
             android:layout_height="190dp"
             android:layout_margin="10dp"
-            app:cardBackgroundColor="@color/material_cards">
+            app:cardBackgroundColor="@color/material_cards"
+            android:id="@+id/addBookCv">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -34,7 +35,7 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:background="@drawable/backgroundpurple"
-                    android:src="@drawable/ic_library_add_black_24dp"
+                    android:src="@drawable/ic_add_book"
                     android:padding="10dp"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -73,7 +74,7 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:background="@drawable/backgroundyellow"
-                    android:src="@drawable/ic_assignment_returned_black_24dp"
+                    android:src="@drawable/ic_return_book"
                     android:padding="10dp"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -110,7 +111,8 @@
             android:layout_width="160dp"
             android:layout_height="190dp"
             android:layout_margin="10dp"
-            app:cardBackgroundColor="@color/material_cards">
+            app:cardBackgroundColor="@color/material_cards"
+            android:id="@+id/issueBookCv">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -120,7 +122,7 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:background="@drawable/backgroundpink"
-                    android:src="@drawable/ic_book_black_24dp"
+                    android:src="@drawable/ic_issue_book"
                     android:padding="10dp"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -159,7 +161,7 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:background="@drawable/backgroundgreen"
-                    android:src="@drawable/ic_attach_money_black_24dp"
+                    android:src="@drawable/ic_collect_fine"
                     android:padding="10dp"/>
                 <TextView
                     android:layout_width="wrap_content"

@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,10 +21,27 @@ public class LibrarianMainActivity extends AppCompatActivity {
     private Button logout;
     private FirebaseAuth mAuth;
     private SharedPrefManager sharedPrefManager;
+    private CardView addBook, issueBook;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_librarian_main);
+        addBook = findViewById(R.id.addBookCv);
+        addBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LibrarianMainActivity.this, AddBookActivity.class);
+                startActivity(intent);
+            }
+        });
+        issueBook = findViewById(R.id.issueBookCv);
+        issueBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LibrarianMainActivity.this, IssueBookActivity.class);
+                startActivity(intent);
+            }
+        });
         mAuth = FirebaseAuth.getInstance();
         updateUI(mAuth.getCurrentUser());
         sharedPrefManager = new SharedPrefManager(this);

@@ -23,9 +23,24 @@
     <string name="user_type_librarian">Librarian</string>
     <string name="register_as">Register as:</string>
 
+    <!-- bundle args -->
+    <string name="bundle_user">user</string>
+
     <string name="dbname_users">users</string>
     <string name="dbname_librarians">librarians</string>
+    <string name="dbname_books">books</string>
+    <string name="dbname_refined_books">refined_books</string>
+
     <string name="register_account">Register Account</string>
     <string name="login_as">Login as</string>
+    <string name="update_profile">Update Profile</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="add_book">Add Book</string>
+
+    <!-- database fields -->
+    <string name="field_computer_code">computer_code</string>
+    <string name="field_book_id">book_id</string>
+    <string name="field_profile_pic">profile_pic</string>
+    <string name="field_name">name</string>
+    <string name="field_email">email</string>
 </resources>

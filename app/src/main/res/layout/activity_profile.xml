@@ -2,7 +2,8 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -39,11 +40,13 @@
                     android:layout_marginTop="50dp"
                     android:src="@drawable/ic_profile_default"
                     android:layout_marginLeft="100dp"
+                    android:transitionName="profile"
+                    tools:ignore="UnusedAttribute"
                     />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/nameTV"
+                    android:id="@+id/nameTv"
                     android:text="Kaam Bhari"
                     android:textColor="@color/blue"
                     android:layout_marginTop="20dp"

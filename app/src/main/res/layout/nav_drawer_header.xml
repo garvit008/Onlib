@@ -17,7 +17,8 @@
         android:src="@drawable/ic_profile_default"
         app:civ_border_width="0.5dp"
         android:id="@+id/profileImageView"
-        app:civ_border_color="@color/text_white"/>
+        app:civ_border_color="@color/text_white"
+        android:transitionName="profile"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -28,13 +29,13 @@
             android:layout_marginTop="40dp"
             android:layout_marginLeft="20dp"
             android:textColor="@color/text_white"
-            android:id="@+id/headerNameTv"
+            android:id="@+id/nameTv"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/computerCodeTv"
-            android:layout_below="@id/headerNameTv"
+            android:id="@+id/headerComputerCodeTv"
+            android:layout_below="@id/nameTv"
             android:layout_marginLeft="150dp"
             android:layout_marginTop="5dp"
             android:text="36921"

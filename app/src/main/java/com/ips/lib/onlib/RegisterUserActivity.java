@@ -149,9 +149,10 @@ public class RegisterUserActivity extends AppCompatActivity implements AdapterVi
             user.setUser_id(userID);
             user.setEmail(email);
             user.setName(name);
-            user.setIssued_books(null);
-            user.setWishlist(null);
+            user.setIssued_books("");
+            user.setWishlist("");
             user.setProfile_pic("");
+            user.setBooks_issued_count(0);
             myRef.child(getString(R.string.dbname_users))
                     .child(userID).setValue(user);
         }

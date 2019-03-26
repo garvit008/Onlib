@@ -6,13 +6,15 @@ public class Librarian {
     private String name;
     private String email;
     private String profile_pic;
+    private String fees_collected;
 
-    public Librarian(String user_id, String computer_code, String name, String email, String profile_pic) {
+    public Librarian(String user_id, String computer_code, String name, String email, String profile_pic, String fees_collected) {
         this.user_id = user_id;
         this.computer_code = computer_code;
         this.name = name;
         this.email = email;
         this.profile_pic = profile_pic;
+        this.fees_collected = fees_collected;
     }
 
     public Librarian() {
@@ -56,5 +58,13 @@ public class Librarian {
 
     public void setProfile_pic(String profile_pic) {
         this.profile_pic = profile_pic;
+    }
+
+    public String getFees_collected() {
+        return fees_collected;
+    }
+
+    public void setFees_collected(String fees_collected) {
+        this.fees_collected = fees_collected;
     }
 }
