@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="android:theme">
+        tools:replace="android:theme"
+        android:usesCleartextTraffic="true">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,6 +39,7 @@
         <activity android:name=".AddBookActivity"/>
         <activity android:name=".ReturnBookActivity"/>
         <activity android:name=".IssueBookActivity"/>
+        <activity android:name=".CatalogueActivity"/>
         <provider android:name=".SearchSuggestionProvider"
             android:authorities="com.ips.lib.onlib.SearchSuggestionProvider"
             android:exported="false"

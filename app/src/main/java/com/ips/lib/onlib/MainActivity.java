@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private CircleImageView profileImageView;
     private TextView name, computerCode;
     private User currentUser;
+    private CardView cs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,7 +142,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        cs = findViewById(R.id.cs);
+        cs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CatalogueActivity.class);
+                intent.putExtra(getString(R.string.intent_query), "CS");
+                startActivity(intent);
 
+            }
+        });
     }
 
     @Override

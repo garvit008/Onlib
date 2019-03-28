@@ -21,7 +21,7 @@ public class LibrarianMainActivity extends AppCompatActivity {
     private Button logout;
     private FirebaseAuth mAuth;
     private SharedPrefManager sharedPrefManager;
-    private CardView addBook, issueBook;
+    private CardView addBook, issueBook, returBook;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +39,14 @@ public class LibrarianMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LibrarianMainActivity.this, IssueBookActivity.class);
+                startActivity(intent);
+            }
+        });
+        returBook = findViewById(R.id.returnBookCv);
+        returBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LibrarianMainActivity.this, ReturnBookActivity.class);
                 startActivity(intent);
             }
         });

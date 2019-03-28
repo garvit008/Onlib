@@ -14,9 +14,11 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +41,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.ips.lib.onlib.Models.Book;
 import com.ips.lib.onlib.Models.BookRefined;
+import com.ips.lib.onlib.utils.BookHelper;
 import com.ips.lib.onlib.utils.UniversalImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.todddavies.components.progressbar.ProgressWheel;
@@ -57,7 +60,7 @@ public class AddBookActivity extends AppCompatActivity {
     private static final String TAG = "AddBookActivity";
     private AlphaAnimation buttonClick;
     private ImageView bookCover;
-    private ProgressWheel progressWheel;
+    private ProgressBar progressBar;
     private TextView changeCover;
     private RelativeLayout relativeLayout;
     private static final int RequestCode = 100;
@@ -88,12 +91,8 @@ public class AddBookActivity extends AppCompatActivity {
                         RequestCode);
             }
         });
-        progressWheel = findViewById(R.id.progressbar);
-        progressWheel.setBarWidth(5);
-        progressWheel.setRimWidth(2);
-        progressWheel.setBarColor(R.color.blue);
-        progressWheel.setRimColor(R.color.text_white);
-        progressWheel.setVisibility(View.GONE);
+        progressBar = findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.GONE);
         relativeLayout = findViewById(R.id.mainRelativeLayout);
         relativeLayout.setAlpha(1f);
         database = FirebaseDatabase.getInstance();
@@ -114,13 +113,14 @@ public class AddBookActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    closeKeyBoard();
                     book.setBook_id(bookId.getText().toString());
                     book.setName(name.getText().toString());
                     book.setAuthor(author.getText().toString());
                     book.setEdition(edition.getText().toString());
                     book.setBranch(branch.getText().toString());
                     uploadCover();
-                    book.setIs_issued("");
+                    book.setIs_issued("false");
                     book.setIssue_date("");
                     book.setIssued_to("");
                     Query query = myRef.child(getString(R.string.dbname_books))
@@ -134,8 +134,7 @@ public class AddBookActivity extends AppCompatActivity {
                             }
                             else {
                                 Log.d(TAG, "onDataChange: book id doesn't exist");
-                                progressWheel.setVisibility(View.VISIBLE);
-                                progressWheel.startSpinning();
+                                progressBar.setVisibility(View.VISIBLE);
                                 relativeLayout.setAlpha(0.5f);
                                 addBookDetails(book);
                             }
@@ -225,9 +224,7 @@ public class AddBookActivity extends AppCompatActivity {
                     final String key = book.getBook_id();
                     myRef.child(getString(R.string.dbname_books))
                             .child(key).setValue(book);
-                    final String refined_key = book.getName() + book.getAuthor() + book.getEdition();
-                    refined_key.replace(" ", "");
-                    refined_key.toLowerCase();
+                    final String refined_key = BookHelper.getRefinedKey(book);
                     Query query1 = myRef.child(getString(R.string.dbname_refined_books))
                             .child(refined_key);
 
@@ -285,8 +282,7 @@ public class AddBookActivity extends AppCompatActivity {
 
         Toast.makeText(this, "Book added successfully!", Toast.LENGTH_SHORT).show();
         bookId.getText().clear();
-        progressWheel.stopSpinning();
-        progressWheel.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
         relativeLayout.setAlpha(1);
 
     }
@@ -321,5 +317,12 @@ public class AddBookActivity extends AppCompatActivity {
                 Log.d(TAG, "onFailure: photo upload failure due to: " + e.getMessage());
             }
         });
+    }
+
+    private void closeKeyBoard() {
+        if (getCurrentFocus() != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
     }
 }

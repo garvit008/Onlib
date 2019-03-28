@@ -43,4 +43,17 @@
     <string name="field_profile_pic">profile_pic</string>
     <string name="field_name">name</string>
     <string name="field_email">email</string>
+    <string name="field_cover">cover</string>
+    <string name="field_book_name">name</string>
+    <string name="field_author">author</string>
+    <string name="field_edition">edition</string>
+    <string name="field_available">available</string>
+
+    <string name="label_confirm_latefee">Confirm Payement?</string>
+    <string name="label_confirm">confirm</string>
+    <string name="label_cancel">cancel</string>
+    <string name="intent_query">query</string>
+    <string name="Catalogue">Catalogue</string>
+    <string name="issue_book">Issue Book</string>
+    <string name="return_book">Return Book</string>
 </resources>
