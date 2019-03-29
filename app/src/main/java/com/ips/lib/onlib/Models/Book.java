@@ -8,14 +8,20 @@ public class Book {
     private String edition;
     private String branch;
     private String cover;
+    private String is_issued;
+    private String issue_date;
+    private String issued_to;
 
-    public Book(String name, String book_id, String author, String edition, String branch, String cover) {
+    public Book(String name, String book_id, String author, String edition, String branch, String cover, String is_issued, String issue_date, String issued_to) {
         this.name = name;
         this.book_id = book_id;
         this.author = author;
         this.edition = edition;
         this.branch = branch;
         this.cover = cover;
+        this.is_issued = is_issued;
+        this.issue_date = issue_date;
+        this.issued_to = issued_to;
     }
 
     public Book() {
@@ -67,5 +73,44 @@ public class Book {
 
     public void setCover(String cover) {
         this.cover = cover;
+    }
+
+    public String getIs_issued() {
+        return is_issued;
+    }
+
+    public void setIs_issued(String is_issued) {
+        this.is_issued = is_issued;
+    }
+
+    public String getIssue_date() {
+        return issue_date;
+    }
+
+    public void setIssue_date(String issue_date) {
+        this.issue_date = issue_date;
+    }
+
+    public String getIssued_to() {
+        return issued_to;
+    }
+
+    public void setIssued_to(String issued_to) {
+        this.issued_to = issued_to;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "name='" + name + '\'' +
+                ", book_id='" + book_id + '\'' +
+                ", author='" + author + '\'' +
+                ", edition='" + edition + '\'' +
+                ", branch='" + branch + '\'' +
+                ", cover='" + cover + '\'' +
+                ", is_issued='" + is_issued + '\'' +
+                ", issue_date='" + issue_date + '\'' +
+                ", issued_to='" + issued_to + '\'' +
+                '}';
     }
 }

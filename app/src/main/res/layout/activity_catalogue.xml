@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:background="@color/material_backgroud_grey">
+
+    <RelativeLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+        android:id="@+id/relalayout1">
+       <android.support.design.widget.AppBarLayout
+           android:layout_width="match_parent"
+           android:layout_height="?attr/actionBarSize"
+           android:background="@color/material_appbar_grey"
+           android:fitsSystemWindows="true"
+           android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+       <android.support.v7.widget.Toolbar
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           app:popupTheme="@style/ToolbarTheme"
+           android:elevation="10dp"
+           app:title="@string/Catalogue"
+           android:id="@+id/toolbar">
+       </android.support.v7.widget.Toolbar>
+       </android.support.design.widget.AppBarLayout>
+   </RelativeLayout>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pullToRefresh"
+        android:layout_below="@id/relalayout1">
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:id="@+id/recyclerView"
+            >
+        </android.support.v7.widget.RecyclerView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+    <ProgressBar
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/progressbar"
+        android:layout_centerInParent="true"/>
+</RelativeLayout>

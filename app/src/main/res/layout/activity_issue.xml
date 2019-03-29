@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/relalayout1">
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/material_appbar_grey"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <android.support.v7.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:popupTheme="@style/ToolbarTheme"
+                android:elevation="10dp"
+                app:title="@string/issue_book"
+                android:id="@+id/toolbar">
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/issuelayout"
+        android:background="@color/material_dark_search"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+        android:layout_below="@id/relalayout1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/issueTV"
+            android:textSize="36sp"
+            android:layout_marginTop="120dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Issue Book"
+            android:textColor="@color/text_white"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/issueTV"
+            android:id="@+id/computerCodeTV"
+            android:text="Computer Code"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/blue"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/computerCodeET"
+            android:textSize="18sp"
+            android:hint="Enter Computer Code"
+            android:inputType="number"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@id/computerCodeTV"
+            android:layout_marginTop="10dp"
+            android:textCursorDrawable="@null"
+            android:textColor="@color/text_white"
+            android:textColorHint="@color/material_secondary_text_grey"
+            android:backgroundTint="@color/material_divider_light"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/computerCodeET"
+            android:id="@+id/bookIdTV"
+            android:text="Book Id"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/blue"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/bookIdET"
+            android:layout_below="@+id/bookIdTV"
+            android:textSize="18sp"
+            android:hint="Enter Book Id"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/text_white"
+            android:textCursorDrawable="@null"
+            android:textColorHint="@color/material_secondary_text_grey"
+            android:backgroundTint="@color/material_divider_light"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/issueBtn"
+            android:layout_below="@+id/bookIdET"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Issue Book"
+            android:textSize="18sp"
+            android:background="@drawable/round_corner_login_button_layout"
+            android:textColor="@color/text_white"
+            />
+
+        <ProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/computerCodeET"
+            android:layout_centerInParent="true"
+            android:id="@+id/issuePbar"
+            />
+
+    </RelativeLayout>
+
+</RelativeLayout>
+

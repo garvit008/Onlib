@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/material_backgroud_grey">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/relalayout">
+        <!--toolbar -->
+        <include layout="@layout/activity_edit_profile_toolbar"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relalayout"
+        android:padding="20dp"
+        android:id="@+id/mainRelativeLayout">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/relalayout1">
+        <FrameLayout
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_centerInParent="true">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileImageView"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/ic_profile_default"
+                app:civ_border_width="0.5dp"
+                android:layout_gravity="bottom|center_horizontal"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_camera"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_camera_white"
+                android:layout_gravity="bottom|right"
+                app:civ_border_width="0.5dp"
+                app:civ_circle_background_color="@color/blue"
+                />
+        </FrameLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/relalayout2"
+        android:layout_below="@id/relalayout1"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nameTv"
+            android:text="Name"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/blue"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/nameEt"
+            android:textSize="18sp"
+            android:hint="Name"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@id/nameTv"
+            android:layout_marginTop="5dp"
+            android:textCursorDrawable="@null"
+            android:textColor="@color/text_white"
+            android:textColorHint="@color/material_secondary_text_grey"
+            android:backgroundTint="@color/material_divider_light"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/emailTv"
+            android:text="Email"
+            android:layout_below="@id/nameEt"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/blue"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/emailEditText"
+            android:textSize="18sp"
+            android:hint="Email"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@id/emailTv"
+            android:layout_marginTop="5dp"
+            android:textCursorDrawable="@null"
+            android:textColor="@color/text_white"
+            android:textColorHint="@color/material_secondary_text_grey"
+            android:backgroundTint="@color/material_divider_light"
+            />
+
+    </RelativeLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/updateProfileBtn"
+        android:layout_below="@id/relalayout2"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/update_profile"
+        android:textColor="@color/text_white"
+        android:background="@drawable/round_corner_login_button_layout"
+        />
+    </RelativeLayout>
+
+    <ProgressBar
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/progressbar"/>
+
+</RelativeLayout>
