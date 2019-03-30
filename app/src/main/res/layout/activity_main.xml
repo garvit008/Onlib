@@ -24,7 +24,9 @@
             android:layout_height="match_parent"
             tools:context=".MainActivity"
             android:orientation="vertical"
-            android:padding="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
             android:background="@color/material_backgroud_grey"
             android:gravity="center"
             android:layout_below="@id/relalayout1">
@@ -333,6 +335,54 @@
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_below="@+id/ft"
+                        android:id="@+id/ch"
+                        app:cardBackgroundColor="@color/material_cards"
+                        android:layout_height="190dp"
+                        android:layout_margin="10dp"
+                        android:layout_marginTop="90dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="64dp"
+                                android:layout_height="70dp"
+                                android:background="@drawable/bggrey"
+                                android:padding="10dp"
+                                android:src="@drawable/ic_colorize_black_24dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:textSize="20dp"
+                                android:text="Chemical Engineering"
+                                android:textColor="@color/backgroundcolor"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_margin="10dp"
+                                android:background="@color/lightgray" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:background="@color/cardview_dark_background"/>
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_below="@+id/ch"
                         android:id="@+id/ge"
                         app:cardBackgroundColor="@color/material_cards"
                         android:layout_height="220dp"

@@ -8,14 +8,16 @@ public class BookRefined {
     private String total;
     private String available;
     private String cover;
+    private String branch;
 
-    public BookRefined(String name, String author, String edition, String total, String available, String cover) {
+    public BookRefined(String name, String author, String edition, String total, String available, String cover, String branch) {
         this.name = name;
         this.author = author;
         this.edition = edition;
         this.total = total;
         this.available = available;
         this.cover = cover;
+        this.branch = branch;
     }
 
     public BookRefined() {
@@ -67,5 +69,13 @@ public class BookRefined {
 
     public void setCover(String cover) {
         this.cover = cover;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
     }
 }

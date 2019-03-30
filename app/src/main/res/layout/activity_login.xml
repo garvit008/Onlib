@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/relalayout1"
-        android:background="@color/material_dark_search">
+        android:background="@color/material_backgroud_grey">
 
         <TextView
             android:layout_width="wrap_content"

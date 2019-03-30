@@ -38,7 +38,7 @@ public class CatalogueActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private List<BookRefined> books;
     private BooksAdapter adapter;
-    private String query;
+    private String queryStr;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -62,9 +62,7 @@ public class CatalogueActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressbar);
         progressBar.setVisibility(View.VISIBLE);
         recyclerView = findViewById(R.id.recyclerView);
-        Intent intent = getIntent();
-        query = intent.getStringExtra(getString(R.string.intent_query));
-        Log.d(TAG, "onCreate: query = " + query);
+        Log.d(TAG, "onCreate: query = " + queryStr);
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
         getResults();
@@ -77,26 +75,25 @@ public class CatalogueActivity extends AppCompatActivity {
     }
 
     private void getResults(){
-        Query query = myRef.child(getString(R.string.dbname_refined_books));
+        Intent intent = getIntent();
+        queryStr = intent.getStringExtra(getString(R.string.intent_query));
+        Query query = myRef.child(getString(R.string.dbname_refined_books))
+                      .orderByChild(getString(R.string.field_branch))
+                      .equalTo(queryStr);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<BookRefined> refinedBooks = new ArrayList<>();
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    Map<String, Object> dsMap = (HashMap<String, Object>) ds.getValue();
-                    BookRefined book = new BookRefined();
-                    Log.d(TAG, "onDataChange: map = " + dsMap.toString());
-                    book.setCover(dsMap.get(getString(R.string.field_cover)).toString());
-                    book.setAuthor(dsMap.get(getString(R.string.field_author)).toString());
-                    book.setName(dsMap.get(getString(R.string.field_name)).toString());
-                    book.setEdition(dsMap.get(getString(R.string.field_edition)).toString());
-                    book.setAvailable(dsMap.get(getString(R.string.field_available)).toString());
+
+                    BookRefined book;
+                    book = ds.getValue(BookRefined.class);
                     refinedBooks.add(book);
                 }
                 books = refinedBooks;
                 Log.d(TAG, "onDataChange: size " + books.size());
-                adapter = new BooksAdapter(CatalogueActivity.this, books);
+                adapter = new BooksAdapter(CatalogueActivity.this, books, TAG);
                 recyclerView.setAdapter(adapter);
                 progressBar.setVisibility(View.GONE);
             }

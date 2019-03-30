@@ -21,8 +21,9 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.MyViewHolder
 
     private List<BookRefined> bookList;
     private Context context;
+    private String activity;
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView name, author, editon, availability;
+        public TextView name, author, editon, availability, branch;
         public ImageView cover;
 
         public MyViewHolder(View view) {
@@ -32,20 +33,30 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.MyViewHolder
             editon = (TextView) view.findViewById(R.id.bookEdition);
             availability = (TextView) view.findViewById(R.id.bookAvailability);
             cover = (ImageView) view.findViewById(R.id.bookCoverIv);
+            branch = view.findViewById(R.id.branch);
         }
     }
 
-    public BooksAdapter(Context context, List<BookRefined> bookList) {
+    public BooksAdapter(Context context, List<BookRefined> bookList, String activity) {
         this.context = context;
         this.bookList = bookList;
+        this.activity = activity;
         initImageLoader();
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View itemView = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.book_list_item, viewGroup, false);
+        View itemView = null;
+        if(activity.equals("CatalogueActivity")){
+            itemView = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.book_list_item, viewGroup, false);
+        }
+        else{
+            itemView = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.search_list_item, viewGroup, false);
+        }
+
 
         return  new MyViewHolder(itemView);
     }
@@ -63,6 +74,9 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.MyViewHolder
           else
           {
               myViewHolder.availability.setTextColor(context.getResources().getColor(R.color.text_green));
+          }
+          if(activity.equals("SearchActivity")){
+              myViewHolder.branch.setText("Branch: "+book.getBranch());
           }
           myViewHolder.availability.setText("Copies available: "+ book.getAvailable());
           UniversalImageLoader.setImage(book.getCover(), myViewHolder.cover, null, "");

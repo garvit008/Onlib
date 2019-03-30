@@ -276,6 +276,7 @@ public class AddBookActivity extends AppCompatActivity {
             bookRefined2.setAuthor(book.getAuthor());
             bookRefined2.setEdition(book.getEdition());
             bookRefined2.setCover(book.getCover());
+            bookRefined2.setBranch(book.getBranch());
             myRef.child(getString(R.string.dbname_refined_books))
                     .child(key).setValue(bookRefined2);
         }
