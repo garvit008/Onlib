@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private CircleImageView profileImageView;
     private TextView name, computerCode;
     private User currentUser;
-    private CardView cs;
+    private CardView cs, me, ec, ce, ex, ft, ch, ge;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         cs = findViewById(R.id.cs);
         cs.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,6 +153,74 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        me = findViewById(R.id.me);
+        me.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CatalogueActivity.class);
+                intent.putExtra(getString(R.string.intent_query), "ME");
+                startActivity(intent);
+            }
+        });
+
+        ec = findViewById(R.id.ec);
+        ec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CatalogueActivity.class);
+                intent.putExtra(getString(R.string.intent_query), "EC");
+                startActivity(intent);
+            }
+        });
+
+        ce = findViewById(R.id.ce);
+        ce.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CatalogueActivity.class);
+                intent.putExtra(getString(R.string.intent_query), "CE");
+                startActivity(intent);
+            }
+        });
+
+        ex = findViewById(R.id.ex);
+        ex.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CatalogueActivity.class);
+                intent.putExtra(getString(R.string.intent_query), "EX");
+                startActivity(intent);
+            }
+        });
+
+        ft = findViewById(R.id.ft);
+        ft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CatalogueActivity.class);
+                intent.putExtra(getString(R.string.intent_query), "FT");
+                startActivity(intent);
+            }
+        });
+        ch = findViewById(R.id.ch);
+        ch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CatalogueActivity.class);
+                intent.putExtra(getString(R.string.intent_query), "CH");
+                startActivity(intent);
+            }
+        });
+        ge = findViewById(R.id.ge);
+        ge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CatalogueActivity.class);
+                intent.putExtra(getString(R.string.intent_query), "GE");
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override

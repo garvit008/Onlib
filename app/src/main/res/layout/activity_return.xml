@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/returnlayout"
-        android:background="@color/material_dark_search"
+        android:background="@color/material_backgroud_grey"
         android:paddingBottom="16dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
@@ -44,7 +44,7 @@
             android:layout_marginTop="150dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:text="Return Book"
+            android:text="@string/return_book"
             android:textColor="@color/text_white"
             />
 
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/returnTV"
             android:id="@+id/bookIdTV"
-            android:text="Book Id"
+            android:text="@string/book_id"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="20dp"
             android:textColor="@color/blue"/>
@@ -64,7 +64,7 @@
             android:id="@+id/bookIdET"
             android:layout_below="@+id/bookIdTV"
             android:textSize="18sp"
-            android:hint="Enter Book Id"
+            android:hint="@string/enter_book_id"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:textColor="@color/text_white"

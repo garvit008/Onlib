@@ -67,7 +67,6 @@ public class EditProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile);
         Toolbar toolbar = findViewById(R.id.edit_profile_toolbar);
         setSupportActionBar(toolbar);
-        setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         progressBar = findViewById(R.id.progressbar);

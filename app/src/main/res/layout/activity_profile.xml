@@ -79,24 +79,45 @@
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>
-
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/material_backgroud_grey"
         android:clipToPadding="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <TextView
-            android:layout_width="fill_parent"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Profile Cards"
-            android:textSize="24dp"
-            android:textAlignment="center"
-            android:textColor="@color/text_white"
-            android:layout_marginTop="150dp"/>
+            android:background="@color/material_backgroud_grey">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/issuedBooksTv"
+                android:text="@string/currently_issued_books"
+                android:textAlignment="center"
+                android:layout_marginTop="10dp"
+                android:textSize="24sp"
+                android:textColor="@color/text_white"
+                android:padding="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/grey_border_bottom" />
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/issuedBooksTv"
+                android:layout_marginTop="10dp"
+                android:scrollbars="vertical"
+                android:id="@+id/recyclerView">
 
+            </android.support.v7.widget.RecyclerView>
 
+            <ProgressBar
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/progressbar"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

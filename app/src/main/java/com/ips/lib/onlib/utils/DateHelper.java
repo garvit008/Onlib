@@ -2,12 +2,7 @@ package com.ips.lib.onlib.utils;
 
 import android.util.Log;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+
 import com.ips.lib.onlib.IssueBookActivity;
 
 import java.text.ParseException;
@@ -47,6 +42,12 @@ public class DateHelper {
 
     public static String getDateString(Date date){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ddZ", Locale.CANADA);
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Canada/Pacific"));
+        return simpleDateFormat.format(date);
+    }
+
+    public static String getSimpleDateString(Date date){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, d MMM, yyyy", Locale.CANADA);
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Canada/Pacific"));
         return simpleDateFormat.format(date);
     }
