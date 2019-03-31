@@ -20,6 +20,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -78,7 +79,7 @@ public class SearchActivity extends AppCompatActivity {
         searchView.requestFocus(1);
         searchView.setQueryHint(getString(R.string.search_hint));
         progressBar = findViewById(R.id.progressbar);
-        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
         recyclerView = findViewById(R.id.recyclerView);
         getElasticSearchPassword();
         //changing searchView's hint and text color
@@ -121,6 +122,27 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_bar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.clear_suggestions:
+                SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this, SearchSuggestionProvider.AUTHORITY,
+                        SearchSuggestionProvider.MODE);
+                suggestions.clearHistory();
+                Toast.makeText(this, "Cleared search suggestions", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                break;
+        }
+        return true;
+    }
 
     /**
      * method to setup searchView Widget
@@ -129,58 +151,9 @@ public class SearchActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+                progressBar.setVisibility(View.VISIBLE);
                 Toast.makeText(SearchActivity.this, "recieved query " + s, Toast.LENGTH_SHORT).show();
-                books = new ArrayList<>();
-                Retrofit retrofit = new Retrofit.Builder()
-                                        .baseUrl(BASE_URL)
-                                        .addConverterFactory(GsonConverterFactory.create())
-                                        .build();
-                ElasticSearchAPI searchAPI = retrofit.create(ElasticSearchAPI.class);
-                HashMap<String, String> headerMap = new HashMap<>();
-                headerMap.put("Authorization", Credentials.basic("user", password));
-                Call<HitsObject> call = searchAPI.search(headerMap,"AND", s+"*");
-                call.enqueue(new Callback<HitsObject>() {
-                    @Override
-                    public void onResponse(Call<HitsObject> call, Response<HitsObject> response) {
-
-                        HitsList hitsList = new HitsList();
-                        String jsonResponse = "";
-                            try{
-                                Log.d(TAG, "onResponse: server response " + response.toString());
-                                if(response.isSuccessful()){
-                                      hitsList = response.body().getHitsList();
-                                }
-                                else {
-                                    jsonResponse = response.errorBody().string();
-                                }
-                                Log.d(TAG, "onResponse: hits " + hitsList);
-                                for(int i=0; i<hitsList.getBookSources().size(); i++){
-                                    books.add(hitsList.getBookSources().get(i).getBook());
-                                }
-                                Log.d(TAG, "onResponse: size = " + books.size());
-                                //setup list of books
-                                adapter = new BooksAdapter(SearchActivity.this, books, TAG);
-                                recyclerView.setAdapter(adapter);
-                                progressBar.setVisibility(View.GONE);
-                            }
-                            catch (NullPointerException e){
-                                Log.d(TAG, "onResponse: ERROR " + e.getMessage());
-                            }
-                            catch (IndexOutOfBoundsException e){
-                                Log.d(TAG, "onResponse: ERROR " + e.getMessage());
-                            }
-                            catch (IOException e){
-                                Log.d(TAG, "onResponse: ERROR " + e.getMessage());
-                            }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<HitsObject> call, Throwable t) {
-                        Log.e(TAG, "onFailure: "+t.getMessage());
-                        Toast.makeText(SearchActivity.this, "Search Failed", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                getResults(s);
                 return false;
             }
 
@@ -223,6 +196,68 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+
+    }
+
+    private void getResults(String s){
+        if(books == null){
+            books = new ArrayList<>();
+        }
+        else {
+            books.clear();
+        }
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ElasticSearchAPI searchAPI = retrofit.create(ElasticSearchAPI.class);
+        HashMap<String, String> headerMap = new HashMap<>();
+        headerMap.put("Authorization", Credentials.basic("user", password));
+        Call<HitsObject> call = searchAPI.search(headerMap,"AND", s+"*");
+        call.enqueue(new Callback<HitsObject>() {
+            @Override
+            public void onResponse(Call<HitsObject> call, Response<HitsObject> response) {
+
+                HitsList hitsList = new HitsList();
+                String jsonResponse = "";
+                try{
+                    Log.d(TAG, "onResponse: server response " + response.toString());
+                    if(response.isSuccessful()){
+                        hitsList = response.body().getHitsList();
+                    }
+                    else {
+                        jsonResponse = response.errorBody().string();
+                    }
+                    Log.d(TAG, "onResponse: hits " + hitsList);
+                    for(int i=0; i<hitsList.getBookSources().size(); i++){
+                        books.add(hitsList.getBookSources().get(i).getBook());
+                    }
+                    Log.d(TAG, "onResponse: size = " + books.size());
+                    //setup list of books
+                    adapter = new BooksAdapter(SearchActivity.this, books, TAG);
+                    recyclerView.setAdapter(adapter);
+                    progressBar.setVisibility(View.GONE);
+                }
+                catch (NullPointerException e){
+                    Log.d(TAG, "onResponse: ERROR " + e.getMessage());
+                }
+                catch (IndexOutOfBoundsException e){
+                    Log.d(TAG, "onResponse: ERROR " + e.getMessage());
+                }
+                catch (IOException e){
+                    Log.d(TAG, "onResponse: ERROR " + e.getMessage());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<HitsObject> call, Throwable t) {
+                Log.e(TAG, "onFailure: "+t.getMessage());
+                Toast.makeText(SearchActivity.this, "Search Failed", Toast.LENGTH_SHORT).show();
             }
         });
     }

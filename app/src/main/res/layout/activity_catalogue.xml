@@ -42,8 +42,8 @@
 
     </android.support.v4.widget.SwipeRefreshLayout>
     <ProgressBar
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/progressbar"
         android:layout_centerInParent="true"/>
 </RelativeLayout>

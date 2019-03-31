@@ -9,6 +9,10 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -17,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,10 +32,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.ips.lib.onlib.Models.Book;
+import com.ips.lib.onlib.Models.BookRefined;
 import com.ips.lib.onlib.Models.User;
+import com.ips.lib.onlib.utils.BooksAdapter;
+import com.ips.lib.onlib.utils.IssuedBooksAdapter;
 import com.ips.lib.onlib.utils.UniversalImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.Inflater;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -45,6 +56,11 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference myRef;
     private FirebaseAuth mAuth;
+    private TextView issuedBooksTv;
+    private RecyclerView recyclerView;
+    private ProgressBar progressBar;
+    private List<Book> books;
+    private IssuedBooksAdapter adapter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -66,7 +82,6 @@ public class ProfileActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         collapsingToolbarLayout = findViewById(R.id.collapsingToolbar);
         Toolbar toolbar = findViewById(R.id.profile_toolbar);
-        setSupportActionBar(toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -91,6 +106,14 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             }
         });
+        progressBar = findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.VISIBLE);
+        recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+        issuedBooksTv = findViewById(R.id.issuedBooksTv);
     }
 
     private void initImageLoader(){
@@ -143,8 +166,11 @@ public class ProfileActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 user = dataSnapshot.getValue(User.class);
 //                Log.d(TAG, "onDataChange: user detials " + currentUser.toString());
-                if(user != null)
+                if(user != null){
                     setUpProfileWidgets();
+                    getIssueBookDetails();
+                }
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -159,6 +185,57 @@ public class ProfileActivity extends AppCompatActivity {
         UniversalImageLoader.setImage(user.getProfile_pic(), profileImageView, null, "");
         name.setText(user.getName());
         computerCode.setText(user.getComputer_code());
+    }
+
+    private void getIssueBookDetails(){
+        String issuedBooks = user.getIssued_books();
+        books = new ArrayList<>();
+        if(issuedBooks == null){
+            progressBar.setVisibility(View.GONE);
+            issuedBooksTv.setText("No books issued currently");
+        }
+        else
+        {
+            final String[] issuedBooksID = issuedBooks.split("!");
+            for(int i=0; i<issuedBooksID.length; i++){
+                Query query = myRef.child(getString(R.string.dbname_books))
+                        .orderByChild(getString(R.string.field_book_id))
+                        .equalTo(issuedBooksID[i]);
+                final int finalI = i;
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            for(DataSnapshot ds: dataSnapshot.getChildren()){
+                                Log.d(TAG, "onDataChange: book " + ds.toString());
+                                books.add(ds.getValue(Book.class));
+                            }
+
+                            if(finalI ==issuedBooksID.length - 1){
+                                issuedBooksTv.setText(getString(R.string.currently_issued_books));
+                                adapter = new IssuedBooksAdapter(ProfileActivity.this, books);
+                                recyclerView.setAdapter(adapter);
+                                progressBar.setVisibility(View.GONE);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
+
+
+
+
+
+
+        }
+
+
     }
 
 }

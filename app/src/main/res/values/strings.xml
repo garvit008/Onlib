@@ -63,5 +63,6 @@
     <string name="enter_book_id">Enter Book ID</string>
     <string name="enter_computer_code">Enter Computer Code</string>
     <string name="computer_code">Computer Code</string>
-    <string name="return_book">Return Book</string>
+    <string name="clear_search_suggestions">clear search suggestions</string>
+    <string name="currently_issued_books">Currently Issued Books</string>
 </resources>
