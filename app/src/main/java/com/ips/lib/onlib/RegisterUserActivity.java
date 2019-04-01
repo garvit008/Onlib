@@ -159,12 +159,16 @@ public class RegisterUserActivity extends AppCompatActivity implements AdapterVi
             user.setBooks_issued_count(0);
             if(messagingToken!=null){
                 user.setMessaging_token(messagingToken);
+                myRef.child(getString(R.string.dbname_users))
+                        .child(userID).setValue(user);
             }
             else {
                 initFCM();
+                user.setMessaging_token(messagingToken);
+                myRef.child(getString(R.string.dbname_users))
+                        .child(userID).setValue(user);
             }
-            myRef.child(getString(R.string.dbname_users))
-                    .child(userID).setValue(user);
+
         } else if (userType.equals(getString(R.string.user_type_librarian))) {
             Librarian librarian = new Librarian();
             librarian.setComputer_code(compCode);
