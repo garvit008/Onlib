@@ -24,6 +24,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,6 +34,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.ips.lib.onlib.Models.User;
 import com.ips.lib.onlib.utils.SharedPrefManager;
 import com.ips.lib.onlib.utils.UniversalImageLoader;
@@ -279,6 +282,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser user){
         if(user!=null){
             Log.d(TAG, "updateUI: user logged in");
+            //initFCM();
         }
         else{
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -362,4 +366,6 @@ public class MainActivity extends AppCompatActivity {
         name.setText(currentUser.getName());
         computerCode.setText(currentUser.getComputer_code());
     }
+
+
 }

@@ -15,8 +15,9 @@ public class User implements Parcelable {
     private String wishlist;
     private String profile_pic;
     private long books_issued_count;
+    private String messaging_token;
 
-    public User(String user_id, String computer_code, String name, String email, String issued_books, String wishlist, String profile_pic, long books_issued_count) {
+    public User(String user_id, String computer_code, String name, String email, String issued_books, String wishlist, String profile_pic, long books_issued_count, String messaging_token) {
         this.user_id = user_id;
         this.computer_code = computer_code;
         this.name = name;
@@ -25,6 +26,7 @@ public class User implements Parcelable {
         this.wishlist = wishlist;
         this.profile_pic = profile_pic;
         this.books_issued_count = books_issued_count;
+        this.messaging_token = messaging_token;
     }
 
     public User() {
@@ -116,6 +118,14 @@ public class User implements Parcelable {
 
     public void setProfile_pic(String profile_pic) {
         this.profile_pic = profile_pic;
+    }
+
+    public String getMessaging_token() {
+        return messaging_token;
+    }
+
+    public void setMessaging_token(String messaging_token) {
+        this.messaging_token = messaging_token;
     }
 
     @Override

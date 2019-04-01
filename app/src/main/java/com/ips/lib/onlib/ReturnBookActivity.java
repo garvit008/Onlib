@@ -27,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.ips.lib.onlib.Models.Book;
+import com.ips.lib.onlib.Models.BookNotification;
 import com.ips.lib.onlib.Models.BookRefined;
 import com.ips.lib.onlib.Models.Librarian;
 import com.ips.lib.onlib.Models.User;
@@ -166,8 +167,8 @@ public class ReturnBookActivity extends AppCompatActivity {
                                     }
                                     if(user != null){
                                         String target = book.getBook_id()+"!";
-                                        String replacement = target.replace(target, "");
-                                     //   Log.d(TAG, "onDataChange: replaced " + replacement);
+                                        String replacement = user.getIssued_books().replace(target, "");
+                                        Log.d(TAG, "onDataChange: replaced " + replacement);
                                         user.setIssued_books(replacement);
                                         if(user.getBooks_issued_count()>0){
                                             user.setBooks_issued_count(user.getBooks_issued_count() - 1);
@@ -235,6 +236,12 @@ public class ReturnBookActivity extends AppCompatActivity {
                                     myRef.child(getString(R.string.dbname_librarians))
                                             .child(mAuth.getCurrentUser().getUid())
                                             .setValue(librarian);
+                                    BookNotification bookNotification = new BookNotification();
+                                    bookNotification.setContent("Book returned successfully \n title: " + book.getName());
+                                    bookNotification.setDate(DateHelper.getDateString(returnDate));
+                                    myRef.child(getString(R.string.dbname_notifications))
+                                            .child(user.getUser_id())
+                                            .setValue(bookNotification);
                                     Toast.makeText(ReturnBookActivity.this, "Book returned successfully", Toast.LENGTH_SHORT).show();
                                 }
                                 else
@@ -249,6 +256,8 @@ public class ReturnBookActivity extends AppCompatActivity {
 
                             }
                         });
+
+
                     }
                 });
         String negativeText = getString(android.R.string.cancel);
@@ -321,4 +330,5 @@ public class ReturnBookActivity extends AppCompatActivity {
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
     }
+
 }
