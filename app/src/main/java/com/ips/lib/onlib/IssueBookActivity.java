@@ -27,6 +27,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.ips.lib.onlib.Models.Book;
+import com.ips.lib.onlib.Models.BookNotification;
 import com.ips.lib.onlib.Models.BookRefined;
 import com.ips.lib.onlib.Models.User;
 import com.ips.lib.onlib.utils.BookHelper;
@@ -61,6 +62,7 @@ public class IssueBookActivity extends AppCompatActivity {
     private BookRefined bookRefined;
     private static final long MAX_BOOK_COUNT = 3;
     private String issueDate;
+    private Date issueDateNotif;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -202,6 +204,12 @@ public class IssueBookActivity extends AppCompatActivity {
                         myRef.child(getString(R.string.dbname_refined_books))
                                 .child(refined_key).setValue(bookRefined);
                         progressBar.setVisibility(View.GONE);
+                        BookNotification bookNotification = new BookNotification();
+                        bookNotification.setContent("Book issued successfully \n title: " + book.getName());
+                        bookNotification.setDate(DateHelper.getDateString(issueDateNotif));
+                        myRef.child(getString(R.string.dbname_notifications))
+                                .child(user.getUser_id())
+                                .setValue(bookNotification);
                         Toast.makeText(IssueBookActivity.this, "Book issued Successfully", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -251,6 +259,7 @@ public class IssueBookActivity extends AppCompatActivity {
             String difference = "";
             Log.d(TAG, "onPostExecute: date = " + result );
             Date date = new Date(result);
+            issueDateNotif = date;
             Log.d(TAG, "onPostExecute: date " + date);
             issueDate = DateHelper.getDateString(date);
             Log.d(TAG, "onPostExecute: issueDate = " + issueDate);

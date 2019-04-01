@@ -189,8 +189,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void getIssueBookDetails(){
         String issuedBooks = user.getIssued_books();
+        Log.d(TAG, "getIssueBookDetails: issuedBooks " + issuedBooks);
         books = new ArrayList<>();
-        if(issuedBooks == null){
+        if(issuedBooks.equals("")){
             progressBar.setVisibility(View.GONE);
             issuedBooksTv.setText("No books issued currently");
         }

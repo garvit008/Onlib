@@ -1,5 +1,6 @@
 const functions = require('firebase-functions');
-
+let admin = require('firebase-admin');
+admin.initializeApp(functions.config().firebase);
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
@@ -34,4 +35,44 @@ exports.indexRefinedBooksToElastic = functions.database.ref('/refined_books/{boo
 		    return console.log("ElasticSearch response", response);
 		  });
      });
-		
+	 
+	 
+	exports.sendNotification = functions.database.ref('/notifications/{userId}').onWrite((change,context) => {
+	
+	   	    const receiverId = context.params.userId;
+	        console.log("receiverId: ", receiverId);
+			
+			//get the cotent
+	        const content = change.after.child('content').val();
+	        console.log("message: ", content);
+	
+	       //get the message date. We'll be sending this in the payload
+	       const date = change.after.child('date').val();
+	       console.log("messageId: ", date);
+			//get the token of the user receiving the message
+		   return admin.database().ref("/users/" + receiverId).once('value').then(snap => {
+				
+				const token = snap.child("messaging_token").val();
+				console.log("token: ", token);
+				
+				//we have everything we need
+				//Build the message payload and send the message
+				console.log("Construction the notification message.");
+				const payload = {
+					data: {
+						data_type: "book_event",
+						title: "New Notification from OnLib",
+						data_content: content,
+						data_date: date,
+					}
+				};
+				
+				return admin.messaging().sendToDevice(token, payload)
+							.then(function(response) {
+								return console.log("Successfully sent message:", response);
+							  })
+							  .catch(function(error) {
+								return console.log("Error sending message:", error);
+							  });
+			});
+	});

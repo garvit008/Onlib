@@ -51,5 +51,10 @@ public class DateHelper {
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Canada/Pacific"));
         return simpleDateFormat.format(date);
     }
+    public static String getDateStringWithTime(Date date){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, d MMM, yyyy 'at' hh:mm a");
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Calcutta"));
+        return simpleDateFormat.format(date);
+    }
 
 }

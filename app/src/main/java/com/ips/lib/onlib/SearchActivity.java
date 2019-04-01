@@ -152,7 +152,6 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 progressBar.setVisibility(View.VISIBLE);
-                Toast.makeText(SearchActivity.this, "recieved query " + s, Toast.LENGTH_SHORT).show();
                 getResults(s);
                 return false;
             }
