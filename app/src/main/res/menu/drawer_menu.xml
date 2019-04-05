@@ -17,18 +17,10 @@
             android:id="@+id/issued"
             android:title="@string/issue_history"
             android:icon="@drawable/ic_history"/>
-        <item
-            android:id="@+id/reqAbook"
-            android:title="@string/req_book"
-            android:icon="@drawable/ic_req_book"/>0
     </group>
     <group
         android:id="@+id/menu_bottom"
         android:checkableBehavior="single">
-        <item
-            android:id="@+id/settings"
-            android:title="@string/settings"
-            android:icon="@drawable/ic_settings"/>
         <item
             android:id="@+id/logout"
             android:title="@string/logout"

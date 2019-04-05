@@ -1,9 +1,13 @@
 package com.ips.lib.onlib;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
@@ -31,7 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CatalogueActivity extends AppCompatActivity {
+public class CatalogueActivity extends AppCompatActivity implements BooksAdapter.OnClickListerner {
 
     private static final String TAG = "CatalogueActivity";
     private RecyclerView recyclerView;
@@ -93,7 +98,7 @@ public class CatalogueActivity extends AppCompatActivity {
                 }
                 books = refinedBooks;
                 Log.d(TAG, "onDataChange: size " + books.size());
-                adapter = new BooksAdapter(CatalogueActivity.this, books, TAG);
+                adapter = new BooksAdapter(CatalogueActivity.this, books, TAG, CatalogueActivity.this);
                 recyclerView.setAdapter(adapter);
                 progressBar.setVisibility(View.GONE);
             }
@@ -116,5 +121,26 @@ public class CatalogueActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void onClick(int position, ImageView view) {
+        Log.d(TAG, "onClick: item clicked at " + position + " position");
+        Intent intent = new Intent(this, BookDetailsActivity.class);
+        intent.putExtra(getString(R.string.refined_book_extra), books.get(position));
+        intent.putExtra(getString(R.string.transition_name), ViewCompat.getTransitionName(view));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // Apply activity transition
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    CatalogueActivity.this,
+                    view,
+                    ViewCompat.getTransitionName(view));
+            startActivity(intent, options.toBundle());
+        } else {
+            // Swap without transition
+            startActivity(intent);
+        }
+
     }
 }

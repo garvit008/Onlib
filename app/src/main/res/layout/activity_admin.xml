@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/material_backgroud_grey">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Admin Panel"
+        android:textSize="24sp"
+        android:textColor="@color/text_white"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:textAlignment="center"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send Reminders"
+        android:background="@drawable/round_corner_login_button_layout"
+        android:id="@+id/sendRemBtn"
+        android:layout_centerInParent="true"
+        android:padding="5dp"
+        android:textColor="@color/text_white"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/logout"
+        android:background="@drawable/round_corner_login_button_layout"
+        android:layout_below="@+id/sendRemBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:id="@+id/logout"
+        android:textColor="@color/text_white"/>
+    <ProgressBar
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/progressbar"
+        android:layout_centerInParent="true"/>
+</RelativeLayout>

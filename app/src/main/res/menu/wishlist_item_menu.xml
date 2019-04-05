@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/remove"
+        android:icon="@drawable/ic_options_menu"
+        android:title="Remove from My Books"
+        app:showAsAction="collapseActionView">
+    </item>
+</menu>

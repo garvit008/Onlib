@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:clickable="true"
     android:focusable="true"
     android:paddingBottom="10dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="10dp"
-    android:background="@color/material_cards"
-    android:contextClickable="true">
+    android:background="@color/material_cards">
 
     <ImageView
         android:layout_width="100dp"
@@ -53,11 +51,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
-            android:text="Copies available: 3"
-            android:textColor="@color/text_green"
+            android:id="@+id/bookBranch"
+            android:text="Branch: "
+            android:textColor="@color/material_secondary_text_grey"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last issued on: "
+            android:textColor="@color/material_secondary_text_grey"
             android:textStyle="bold"
-            android:id="@+id/bookAvailability"
+            android:id="@+id/issueDate"
             />
 
     </LinearLayout>

@@ -29,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.ips.lib.onlib.Models.Book;
 import com.ips.lib.onlib.Models.BookNotification;
 import com.ips.lib.onlib.Models.BookRefined;
+import com.ips.lib.onlib.Models.IssueHistoryBook;
 import com.ips.lib.onlib.Models.User;
 import com.ips.lib.onlib.utils.BookHelper;
 import com.ips.lib.onlib.utils.DateHelper;
@@ -205,11 +206,18 @@ public class IssueBookActivity extends AppCompatActivity {
                                 .child(refined_key).setValue(bookRefined);
                         progressBar.setVisibility(View.GONE);
                         BookNotification bookNotification = new BookNotification();
-                        bookNotification.setContent("Book issued successfully \n title: " + book.getName());
+                        bookNotification.setContent("Book issued successfully title: " + book.getName());
                         bookNotification.setDate(DateHelper.getDateString(issueDateNotif));
+                        bookNotification.setType("notification");
                         myRef.child(getString(R.string.dbname_notifications))
                                 .child(user.getUser_id())
                                 .setValue(bookNotification);
+                        IssueHistoryBook historyBook = new IssueHistoryBook(book.getBook_id(), book.getIssue_date());
+                        myRef.child(getString(R.string.dbname_issue_history))
+                                .child(user.getUser_id())
+                                .child(book.getBook_id())
+                                .setValue(historyBook);
+
                         Toast.makeText(IssueBookActivity.this, "Book issued Successfully", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -263,13 +271,6 @@ public class IssueBookActivity extends AppCompatActivity {
             Log.d(TAG, "onPostExecute: date " + date);
             issueDate = DateHelper.getDateString(date);
             Log.d(TAG, "onPostExecute: issueDate = " + issueDate);
-            Date backDate = null;
-            String timeStamp = "2019-03-09T19:25:09+0000";
-            backDate = DateHelper.getFormattedDate(timeStamp);
-            Log.d(TAG, "getTimeStampDifference: date today "+ date);
-            Log.d(TAG, "getTimeStampDifference: date recieved " + backDate);
-            difference = DateHelper.getDaysDifference(backDate, date);
-            Log.d(TAG, "onPostExecute: difference = " + difference);
             }
 
     }

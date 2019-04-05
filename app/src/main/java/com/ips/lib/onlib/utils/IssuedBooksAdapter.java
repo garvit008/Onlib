@@ -20,6 +20,7 @@ public class IssuedBooksAdapter extends RecyclerView.Adapter<IssuedBooksAdapter.
 
     private Context context;
     private List<Book> books;
+    private String activity;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 

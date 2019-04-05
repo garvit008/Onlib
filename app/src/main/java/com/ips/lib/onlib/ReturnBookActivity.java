@@ -237,8 +237,9 @@ public class ReturnBookActivity extends AppCompatActivity {
                                             .child(mAuth.getCurrentUser().getUid())
                                             .setValue(librarian);
                                     BookNotification bookNotification = new BookNotification();
-                                    bookNotification.setContent("Book returned successfully \n title: " + book.getName());
+                                    bookNotification.setContent("Book returned successfully title: " + book.getName());
                                     bookNotification.setDate(DateHelper.getDateString(returnDate));
+                                    bookNotification.setType("notification");
                                     myRef.child(getString(R.string.dbname_notifications))
                                             .child(user.getUser_id())
                                             .setValue(bookNotification);

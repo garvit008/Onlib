@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/app_bar_layout"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            android:id="@+id/collapsingToolbar"
+            app:expandedTitleTextAppearance="@android:color/transparent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/material_appbar_grey">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.5"
+                android:background="@color/material_appbar_grey">
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="40dp"
+                    android:src="@drawable/book"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:id="@+id/bookCoverIv" />
+            </RelativeLayout>
+            <!-- normal toolbar -->
+            <android.support.v7.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/ToolbarTheme"
+                app:layout_collapseMode="pin"
+                android:elevation="10dp"
+                android:id="@+id/toolbar">
+
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/material_backgroud_grey"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/material_backgroud_grey"
+            android:padding="10dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/grey_border_bottom"
+                android:padding="10dp"
+                android:id="@+id/relalayout1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="Book Name"
+                    android:textColor="@color/text_white"
+                    android:textSize="24sp"
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/bookName"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/bookName"
+                    android:text="By Author name"
+                    android:textColor="@color/material_secondary_text_grey"
+                    android:textSize="18sp"
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/bookAuthor"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="Edition: "
+                    android:layout_below="@id/bookAuthor"
+                    android:textSize="18sp"
+                    android:textColor="@color/blue"
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/bookEdition"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/relalayout1"
+                android:padding="10dp"
+                android:background="@drawable/grey_border_bottom"
+                android:id="@+id/relalayout2">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Availabitlity: "
+                    android:textColor="@color/material_secondary_text_grey"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/bookAvailability"
+                    android:textSize="14sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="This book can be found on shelf "
+                    android:layout_below="@id/bookAvailability"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/material_secondary_text_grey"
+                    android:id="@+id/bookShelf"
+                    android:textStyle="bold"/>
+            </RelativeLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/relalayout2"
+                android:layout_centerHorizontal="true"
+                android:text="Add to My Books"
+                android:textColor="@color/text_white"
+                android:background="@drawable/round_corner_login_button_layout"
+                android:layout_marginTop="20dp"
+                android:padding="5dp"
+                android:id="@+id/wishlistBtn"/>
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

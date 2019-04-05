@@ -28,7 +28,10 @@ public class MyFirabaseMessagingService extends FirebaseMessagingService {
     public void onNewToken(String s) {
         Log.d(TAG, "onNewToken: new token" + s);
         super.onNewToken(s);
-        sendRegistrationToServer(s);
+        if(FirebaseAuth.getInstance().getCurrentUser()!=null){
+            sendRegistrationToServer(s);
+        }
+
     }
 
     private void sendRegistrationToServer(String token) {
@@ -75,10 +78,19 @@ public class MyFirabaseMessagingService extends FirebaseMessagingService {
             Log.d(TAG, "onMessageReceived: new incoming message.");
             String title = remoteMessage.getData().get(getString(R.string.data_title));
             String content = remoteMessage.getData().get(getString(R.string.data_content));
-            Date date = DateHelper.getFormattedDate(remoteMessage.getData().get(getString(R.string.data_date)));
-            String dateStr = DateHelper.getDateStringWithTime(date);
-            dateStr = dateStr.replace(".", "");
-            sendMessageNotification(title, content, dateStr);
+            String type = remoteMessage.getData().get("type");
+            if(type.equals("notification")){
+                Date date = DateHelper.getFormattedDate(remoteMessage.getData().get(getString(R.string.data_date)));
+                String dateStr = DateHelper.getDateStringWithTime(date);
+                dateStr = dateStr.replace(".", "");
+                sendMessageNotification(title, content, dateStr);
+            }
+            else {
+                Date date = DateHelper.getFormattedDate(remoteMessage.getData().get(getString(R.string.data_date)));
+                String dateStr = DateHelper.getSimpleDateString(date);
+                dateStr = dateStr.replace(".", "");
+                sendMessageNotification(title, content, dateStr);
+            }
         }
     }
 
@@ -127,18 +139,6 @@ public class MyFirabaseMessagingService extends FirebaseMessagingService {
 
     }
 
-
-    private int buildNotificationId(String id){
-        Log.d(TAG, "buildNotificationId: building a notification id.");
-
-        int notificationId = 0;
-        for(int i = 0; i < 9; i++){
-            notificationId = notificationId + id.charAt(0);
-        }
-        Log.d(TAG, "buildNotificationId: id: " + id);
-        Log.d(TAG, "buildNotificationId: notification id:" + notificationId);
-        return notificationId;
-    }
 
 }
 

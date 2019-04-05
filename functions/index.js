@@ -48,7 +48,10 @@ exports.indexRefinedBooksToElastic = functions.database.ref('/refined_books/{boo
 	
 	       //get the message date. We'll be sending this in the payload
 	       const date = change.after.child('date').val();
-	       console.log("messageId: ", date);
+	       console.log("date: ", date);
+		   
+		   const type = change.after.child('type').val();
+		   console.log("type: ", type);
 			//get the token of the user receiving the message
 		   return admin.database().ref("/users/" + receiverId).once('value').then(snap => {
 				
@@ -64,6 +67,7 @@ exports.indexRefinedBooksToElastic = functions.database.ref('/refined_books/{boo
 						title: "New Notification from OnLib",
 						data_content: content,
 						data_date: date,
+						type: type,
 					}
 				};
 				

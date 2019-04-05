@@ -5,10 +5,13 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -53,7 +56,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements BooksAdapter.OnClickListerner {
     
     
     private SearchView searchView;
@@ -237,7 +240,7 @@ public class SearchActivity extends AppCompatActivity {
                     }
                     Log.d(TAG, "onResponse: size = " + books.size());
                     //setup list of books
-                    adapter = new BooksAdapter(SearchActivity.this, books, TAG);
+                    adapter = new BooksAdapter(SearchActivity.this, books, TAG, SearchActivity.this);
                     recyclerView.setAdapter(adapter);
                     progressBar.setVisibility(View.GONE);
                 }
@@ -262,4 +265,23 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onClick(int position, ImageView view) {
+        Log.d(TAG, "onClick: item clicked at " + position );
+        Intent intent = new Intent(this, BookDetailsActivity.class);
+        intent.putExtra(getString(R.string.refined_book_extra), books.get(position));
+        intent.putExtra(getString(R.string.transition_name), ViewCompat.getTransitionName(view));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // Apply activity transition
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    SearchActivity.this,
+                    view,
+                    ViewCompat.getTransitionName(view));
+            startActivity(intent, options.toBundle());
+        } else {
+            // Swap without transition
+            startActivity(intent);
+        }
+    }
 }

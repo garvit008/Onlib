@@ -4,10 +4,11 @@ public class BookNotification {
 
     private String content;
     private String date;
-
-    public BookNotification(String content, String date) {
+    private String type;
+    public BookNotification(String content, String date, String type) {
         this.content = content;
         this.date = date;
+        this.type = type;
     }
 
     public BookNotification() {
@@ -27,5 +28,13 @@ public class BookNotification {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
