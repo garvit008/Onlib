@@ -224,6 +224,9 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
             case 1:
                 userType = "Librarian";
                 break;
+
+            case 2:
+                userType = "Admin";
         }
     }
 

@@ -36,6 +36,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.ips.lib.onlib.Admin.AdminActivity;
 import com.ips.lib.onlib.Models.User;
 import com.ips.lib.onlib.utils.SharedPrefManager;
 import com.ips.lib.onlib.utils.UniversalImageLoader;
@@ -68,19 +69,24 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         mAuth = FirebaseAuth.getInstance();
-        FirebaseApp.initializeApp(this);
         updateUI(mAuth.getCurrentUser());
+        FirebaseApp.initializeApp(this);
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
         Intent intent = getIntent();
         sharedPrefManager = new SharedPrefManager(this);
-
         if(intent.hasExtra(getString(R.string.user_type))){
             String userType = intent.getStringExtra(getString(R.string.user_type));
             Log.d(TAG, "onCreate: userType = " + userType);
             sharedPrefManager.saveUserType(userType);
             if(userType.equals("Librarian")){
                 checkUserTypeInDB(mAuth.getCurrentUser());
+            }
+            else if(userType.equals("Admin")){
+                validateAdmin(mAuth.getCurrentUser());
+            }
+            else {
+                updateUI(mAuth.getCurrentUser());
             }
         }
 
@@ -93,18 +99,28 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-                menuItem.setChecked(true);
+                Intent intent;
+                switch(menuItem.getItemId()){
+                    case R.id.issued:
+                        intent = new Intent(MainActivity.this, IssueHistoryActivity.class);
+                        startActivity(intent);
+                        break;
 
-                drawerLayout.closeDrawers();
-                if(menuItem.getItemId() == R.id.logout){
-                    mAuth.signOut();
-                    sharedPrefManager.clearUserType();
-                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
+                    case R.id.myBooks:
+                        intent = new Intent(MainActivity.this, MyBooksActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.logout:
+                        mAuth.signOut();
+                        sharedPrefManager.clearUserType();
+                        intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
                 }
+                drawerLayout.closeDrawers();
+                return false;
 
-                return true;
             }
         });
         View headerview = navigationView.getHeaderView(0);
@@ -249,7 +265,10 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //
 //        }
-        updateUI(currentUser);
+        if(sharedPrefManager.getUserType().equals("User")){
+            updateUI(currentUser);
+        }
+
     }
 
     @Override
@@ -259,6 +278,11 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onResume: called with userType " + userType);
         if(userType.equals("Librarian")){
             Intent in = new Intent(MainActivity.this, LibrarianMainActivity.class);
+            startActivity(in);
+            finish();
+        }
+        else if(userType.equals("Admin")){
+            Intent in = new Intent(MainActivity.this, AdminActivity.class);
             startActivity(in);
             finish();
         }
@@ -282,7 +306,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser user){
         if(user!=null){
             Log.d(TAG, "updateUI: user logged in");
-            //initFCM();
+            initFCM();
         }
         else{
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -367,5 +391,63 @@ public class MainActivity extends AppCompatActivity {
         computerCode.setText(currentUser.getComputer_code());
     }
 
+    private void initFCM() {
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(MainActivity.this, new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                String token = instanceIdResult.getToken();
+                Log.e("Token", token);
+                Log.d(TAG, "initFCM: token: " + token);
+                sendRegistrationToServer(token);
+            }
+        });
 
+    }
+
+    private void sendRegistrationToServer(String token) {
+        Log.d(TAG, "sendRegistrationToServer: sending token to server: " + token);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        reference.child(getString(R.string.dbname_users))
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child(getString(R.string.field_messaging_token))
+                .setValue(token);
+    }
+
+    private void validateAdmin(FirebaseUser user){
+        if(user!=null){
+            Query query = myRef.child(getString(R.string.dbname_admin))
+                    .child(user.getUid());
+
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                boolean userFound = false;
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for(DataSnapshot ds: dataSnapshot.getChildren()){
+                        Log.d(TAG, "onDataChange: user found " + ds.toString());
+                        userFound = true;
+                        break;
+                    }
+                    if(userFound){
+                        Log.d(TAG, "onCreate: user found in DB");
+                        Intent in = new Intent(MainActivity.this, AdminActivity.class);
+                        startActivity(in);
+                        finish();
+                    }
+                    else {
+                        Log.d(TAG, "onCreate: user not found in DB");
+                        Toast.makeText(MainActivity.this, "Invalid User. Check the selected user type", Toast.LENGTH_SHORT).show();
+                        Intent in = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(in);
+                        finish();
+                    }
+
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+        }
+    }
 }

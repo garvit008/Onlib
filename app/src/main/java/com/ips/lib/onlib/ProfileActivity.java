@@ -106,6 +106,7 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             }
         });
+        books = new ArrayList<>();
         progressBar = findViewById(R.id.progressbar);
         progressBar.setVisibility(View.VISIBLE);
         recyclerView = findViewById(R.id.recyclerView);
@@ -154,6 +155,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d(TAG, "onResume: ");
         getUserDetails();
     }
 
@@ -167,6 +169,7 @@ public class ProfileActivity extends AppCompatActivity {
                 user = dataSnapshot.getValue(User.class);
 //                Log.d(TAG, "onDataChange: user detials " + currentUser.toString());
                 if(user != null){
+                    books.clear();
                     setUpProfileWidgets();
                     getIssueBookDetails();
                 }

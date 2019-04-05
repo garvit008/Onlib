@@ -42,11 +42,15 @@
         <activity android:name=".LibrarianMainActivity"/>
         <activity android:name=".RegisterUserActivity"/>
         <activity android:name=".ProfileActivity"/>
-        <activity android:name=".EditProfileActivity"/>
+        <activity android:name=".EditProfileActivity" />
         <activity android:name=".AddBookActivity"/>
         <activity android:name=".ReturnBookActivity"/>
         <activity android:name=".IssueBookActivity"/>
         <activity android:name=".CatalogueActivity"/>
+        <activity android:name=".IssueHistoryActivity"/>
+        <activity android:name=".BookDetailsActivity"/>
+        <activity android:name=".MyBooksActivity"/>
+        <activity android:name=".Admin.AdminActivity"/>
         <provider android:name=".SearchSuggestionProvider"
             android:authorities="com.ips.lib.onlib.SearchSuggestionProvider"
             android:exported="false"

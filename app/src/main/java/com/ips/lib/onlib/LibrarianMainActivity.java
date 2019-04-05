@@ -60,6 +60,8 @@ public class LibrarianMainActivity extends AppCompatActivity {
                 mAuth.signOut();
                 sharedPrefManager.clearUserType();
                 Intent intent = new Intent(LibrarianMainActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
             }
@@ -69,6 +71,9 @@ public class LibrarianMainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if(FirebaseAuth.getInstance().getCurrentUser() == null){
+            updateUI(null);
+        }
     }
 
     @Override
@@ -85,6 +90,8 @@ public class LibrarianMainActivity extends AppCompatActivity {
         }
         else{
             Intent intent = new Intent(LibrarianMainActivity.this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
         }

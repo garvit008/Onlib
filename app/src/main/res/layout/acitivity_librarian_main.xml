@@ -10,6 +10,15 @@
     android:background="@color/material_backgroud_grey"
     android:gravity="center">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Librarian Dashboard"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        android:textColor="@color/text_white"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/grey_border_bottom"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -161,15 +170,15 @@
                 <ImageView
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:background="@drawable/backgroundgreen"
-                    android:src="@drawable/ic_collect_fine"
+                    android:background="@drawable/backgroundred"
+                    android:src="@drawable/ic_delete"
                     android:padding="10dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:layout_margin="10dp"
-                    android:text="Collect Dues"
+                    android:text="Delete Book"
                     android:textColor="@color/text_white"/>
                 <View
                     android:layout_width="match_parent"
@@ -180,7 +189,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Collect the dues"
+                    android:text="Delete a book"
                     android:padding="5dp"
                     android:textColor="@color/material_secondary_text_grey"
                     />

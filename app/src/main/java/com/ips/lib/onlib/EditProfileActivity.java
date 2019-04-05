@@ -61,6 +61,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private StorageReference storageRef;
     private FirebaseAuth mAuth;
     HashMap<String, Object> values;
+    private String actiityName;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,7 +107,6 @@ public class EditProfileActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case android.R.id.home:
                 onBackPressed();
-                return true;
             default:
                 break;
         }
@@ -229,6 +229,5 @@ public class EditProfileActivity extends AppCompatActivity {
     private void toggleButtonEnable(){
         updateProfile.setEnabled(true);
     }
-
 
 }

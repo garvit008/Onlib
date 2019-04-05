@@ -16,8 +16,8 @@ public class DateHelper {
     private static final String TAG = "DateHelper";
 
     public static Date getFormattedDate(String dateString) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ddZ", Locale.CANADA);
-        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Canada/Pacific"));
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ddZ");
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Calcutta"));
         simpleDateFormat.setLenient(false);
         try {
             Date date = simpleDateFormat.parse(dateString);
@@ -29,8 +29,8 @@ public class DateHelper {
     }
 
     public static String getDaysDifference(Date from, Date to){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ddZ", Locale.CANADA);
-        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Canada/Pacific"));
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ddZ");
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Calcutta"));
         simpleDateFormat.setLenient(false);
         simpleDateFormat.format(from);
         simpleDateFormat.format(to);
@@ -41,14 +41,14 @@ public class DateHelper {
     }
 
     public static String getDateString(Date date){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ddZ", Locale.CANADA);
-        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Canada/Pacific"));
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ddZ");
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Calcutta"));
         return simpleDateFormat.format(date);
     }
 
     public static String getSimpleDateString(Date date){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, d MMM, yyyy", Locale.CANADA);
-        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Canada/Pacific"));
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, d MMM, yyyy");
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Calcutta"));
         return simpleDateFormat.format(date);
     }
     public static String getDateStringWithTime(Date date){
